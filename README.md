@@ -1,58 +1,78 @@
-# Turborepo Tailwind CSS starter
+# Firegarden
 
-This Turborepo starter is maintained by the Turborepo core team.
+This repository contains a starter pack for creating your own digital business card/resume with plans to expand into a digital garden. Fork this template, customize it, and deploy it to GitHub Pages with your own custom domain.
 
-## Using this example
+## Project Architecture
 
-Run the following command:
+This project is structured as follows:
 
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+- **Monorepo Tool**: NX for efficient workspace management
+- **Language**: TypeScript for type safety and better developer experience
+- **Styling**: Tailwind CSS for utility-first styling
+- **Framework**: Next.js for React-based frontend with dynamic rendering
+- **UI Components**: shadcn/ui components with designs done on v0
+- **Content Management**:
+  - Firebase for database and image storage
+  - FireCMS for content management with write permissions
+  - Next.js frontend with read-only database access
 
-## What's inside?
+## Project Structure
 
-This Turborepo includes the following packages/apps:
+The repository is organized as a monorepo with the following applications:
 
-### Apps and Packages
+1. **Frontend**: A Next.js application serving as the public-facing website
+2. **CMS**: A FireCMS integration for content management (admin access only)
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+When built, both applications are bundled into a single deployable package for GitHub Pages.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Content Architecture
 
-### Building packages/ui
+The site uses a fully dynamic content approach:
 
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
+- All content is fetched directly from Firebase at runtime
+- Dynamic rendering ensures content changes do not require redeployment
+- FireCMS provides a user-friendly interface for content management
+- Role-based authentication restricts CMS access to administrators only
 
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
+## Security and Configuration
 
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+This is a public repository, so all credentials and secrets are stored securely:
 
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
+- No sensitive information is committed directly to the repository
+- Environment variables and secrets are managed through GitHub Secrets
+- Deployment is handled through GitHub Actions pipeline
 
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
+This approach allows others to clone and reuse this project template without compromising security.
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+## Planned Features
 
-### Utilities
+- Digital business card/resume (Phase 1)
+- Digital garden for notes and thoughts (Phase 2)
+- Portfolio section for projects (Phase 3)
 
-This Turborepo has some additional tools already setup for you:
+## Development
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Prerequisites
+
+- Node.js (version specified in .nvmrc)
+- Firebase account
+- GitHub account for deployment
+
+### Getting Started
+
+1. Clone the repository
+2. Create a `.env.local` file based on `.env.example`
+3. Install dependencies: `npm install`
+4. Start development server: `npm run dev`
+
+### Deployment
+
+The site is automatically deployed to GitHub Pages when changes are pushed to the main branch. The deployment process:
+
+1. Builds the Next.js application
+2. Generates the necessary deployment files
+3. Deploys to the custom domain
+
+## License
+
+[MIT License](LICENSE)
