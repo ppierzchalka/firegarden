@@ -7,6 +7,13 @@
 			"@/*": ["./*"]
 		}
 	},
-	"include": ["src", "lib", "components", "turbo", "index.ts"],
+	"include": [
+		"src",
+		"lib",
+		"components",
+		"turbo",
+		"index.ts",
+		"../../apps/firegarden-front/app/modal-content"
+	],
 	"exclude": ["node_modules", "dist"]
 }

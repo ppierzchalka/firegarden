@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
+// import "./storybook.css";
 import "../../tailwind-config/globals.css";
-import "./storybook.css";
 import React from "react";
 import { FiregardenProvider } from "../components/firegarden-provider";
 import { withThemeByClassName } from "@storybook/addon-themes";
@@ -33,7 +33,7 @@ const preview: Preview = {
 		}),
 		(Story) => {
 			return (
-				<FiregardenProvider defaultTheme="system">
+				<FiregardenProvider defaultTheme="light">
 					<div className="font-sans p-4">
 						<Story />
 					</div>
