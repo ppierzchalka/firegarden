@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import "../../tailwind-config/globals.css";
 import "./storybook.css";
 import React from "react";
+import { FiregardenProvider } from "../components/firegarden-provider";
 
 const preview: Preview = {
 	parameters: {
@@ -12,7 +13,7 @@ const preview: Preview = {
 			},
 		},
 		backgrounds: {
-			default: "light",
+			default: "dark",
 			values: [
 				{
 					name: "dark",
@@ -28,9 +29,11 @@ const preview: Preview = {
 	decorators: [
 		(Story) => {
 			return (
-				<div className="font-sans p-4">
-					<Story />
-				</div>
+				<FiregardenProvider>
+					<div className="font-sans p-4">
+						<Story />
+					</div>
+				</FiregardenProvider>
 			);
 		},
 	],
