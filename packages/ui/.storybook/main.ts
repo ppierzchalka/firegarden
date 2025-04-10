@@ -1,13 +1,16 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
 import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import postcssOptions from "../postcss.config.cjs";
 
 /**
  * This function is used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
  */
 function getAbsolutePath(value: string): any {
-	return dirname(require.resolve(join(value, "package.json")));
+	const __dirname = dirname(fileURLToPath(import.meta.url));
+	return join(__dirname, "../node_modules", value);
 }
 const config: StorybookConfig = {
 	stories: [
@@ -31,7 +34,7 @@ const config: StorybookConfig = {
 
 	webpackFinal: async (config) => {
 		// Find CSS rule
-		const cssRule = config.module.rules.find(
+		const cssRule = (config.module as any).rules.find(
 			(rule) => rule.test && rule.test.toString().includes(".css")
 		);
 
@@ -41,7 +44,7 @@ const config: StorybookConfig = {
 			const postCssLoader = {
 				loader: "postcss-loader",
 				options: {
-					postcssOptions: require("../postcss.config.cjs"),
+					postcssOptions,
 				},
 			};
 			// Add the loader to the rule
