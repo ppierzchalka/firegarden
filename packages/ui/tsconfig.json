@@ -1,8 +1,12 @@
 {
 	"extends": "@firegarden/typescript-config/react-library.json",
 	"compilerOptions": {
-		"outDir": "dist"
+		"outDir": "dist",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./*"]
+		}
 	},
-	"include": ["src", "turbo", "index.ts"],
+	"include": ["src", "lib", "components", "turbo", "index.ts"],
 	"exclude": ["node_modules", "dist"]
 }
