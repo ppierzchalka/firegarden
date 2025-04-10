@@ -1,12 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
-const config = require("@repo/tailwind-config/tailwindConfig")
-
+const config = require("@firegarden/tailwind-config/tailwindConfig");
 
 module.exports = {
-    ...config,
-    content : [
-        "./app/**/*.tsx",
-        "../../packages/ui/**/*.tsx",
-    ]
-}
+	...config,
+	content: ["./app/**/*.tsx", "../../packages/ui/**/*.tsx"],
+};

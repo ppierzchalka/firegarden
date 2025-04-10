@@ -1,17 +1,17 @@
 {
-  "name": "@repo/tailwind-config",
-  "version": "1.0.0",
-  "exports": {
-    "./tailwindConfig": "./tailwind.config.cjs",
-    "./postcssConfig": "./postcss.config.cjs",
-    "./styles": "./styles.tsx"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15"
-  },
-  "dependencies": {
-    "tailwindcss-animate": "^1.0.7"
-  }
+	"name": "@firegarden/tailwind-config",
+	"version": "1.0.0",
+	"exports": {
+		"./tailwindConfig": "./tailwind.config.cjs",
+		"./postcssConfig": "./postcss.config.cjs",
+		"./styles": "./styles.tsx"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.4.49",
+		"tailwindcss": "^3.4.15"
+	},
+	"dependencies": {
+		"tailwindcss-animate": "^1.0.7"
+	}
 }

@@ -1,2 +1,2 @@
 /** @type {import('postcss-load-config').Config} */
-module.exports = require("@repo/tailwind-config/postcssConfig")
+module.exports = require("@firegarden/tailwind-config/postcssConfig");

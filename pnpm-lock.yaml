@@ -18,9 +18,9 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  apps/docs:
+  apps/firegarden-cms:
     dependencies:
-      '@repo/ui':
+      '@firegarden/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -33,13 +33,13 @@ importers:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
     devDependencies:
-      '@repo/eslint-config':
+      '@firegarden/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/tailwind-config':
+      '@firegarden/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
-      '@repo/typescript-config':
+      '@firegarden/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/node':
@@ -61,9 +61,9 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  apps/shop:
+  apps/firegarden-front:
     dependencies:
-      '@repo/ui':
+      '@firegarden/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -76,56 +76,13 @@ importers:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
     devDependencies:
-      '@repo/eslint-config':
+      '@firegarden/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/tailwind-config':
+      '@firegarden/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      '@types/node':
-        specifier: ^20
-        version: 20.17.30
-      '@types/react':
-        specifier: 18.3.1
-        version: 18.3.1
-      '@types/react-dom':
-        specifier: 18.3.0
-        version: 18.3.0
-      eslint:
-        specifier: ^8
-        version: 8.57.1
-      eslint-config-next:
-        specifier: 15.0.3
-        version: 15.0.3(eslint@8.57.1)(typescript@5.5.4)
-      typescript:
-        specifier: 5.5.4
-        version: 5.5.4
-
-  apps/web:
-    dependencies:
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      next:
-        specifier: 15.0.3
-        version: 15.0.3(react-dom@19.0.0-rc-66855b96-20241106)(react@19.0.0-rc-66855b96-20241106)
-      react:
-        specifier: 19.0.0-rc-66855b96-20241106
-        version: 19.0.0-rc-66855b96-20241106
-      react-dom:
-        specifier: 19.0.0-rc-66855b96-20241106
-        version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@repo/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
-      '@repo/typescript-config':
+      '@firegarden/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/node':
@@ -216,10 +173,10 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
-      '@repo/eslint-config':
+      '@firegarden/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@firegarden/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@turbo/gen':

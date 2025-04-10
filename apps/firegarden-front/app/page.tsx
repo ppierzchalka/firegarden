@@ -1,5 +1,5 @@
 import Image, { type ImageProps } from "next/image";
-import { Button } from "@repo/ui/Button";
+import { Button } from "@firegarden/ui";
 type Props = Omit<ImageProps, "src"> & {
 	srcLight: string;
 	srcDark: string;
