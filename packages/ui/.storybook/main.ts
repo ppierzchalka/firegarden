@@ -10,25 +10,26 @@ function getAbsolutePath(value: string): any {
 	return dirname(require.resolve(join(value, "package.json")));
 }
 const config: StorybookConfig = {
-    stories: [
+	stories: [
 		"../components/**/*.mdx",
 		"../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
 	],
 
-    addons: [
-        getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
-        getAbsolutePath("@storybook/addon-essentials"),
-        getAbsolutePath("@storybook/addon-onboarding"),
-        getAbsolutePath("@storybook/addon-interactions"),
-        "@chromatic-com/storybook"
-    ],
+	addons: [
+		getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
+		getAbsolutePath("@storybook/addon-essentials"),
+		getAbsolutePath("@storybook/addon-onboarding"),
+		getAbsolutePath("@storybook/addon-interactions"),
+		getAbsolutePath("@storybook/addon-themes"),
+		"@chromatic-com/storybook",
+	],
 
-    framework: {
+	framework: {
 		name: getAbsolutePath("@storybook/react-webpack5"),
 		options: {},
 	},
 
-    webpackFinal: async (config) => {
+	webpackFinal: async (config) => {
 		// Find CSS rule
 		const cssRule = config.module.rules.find(
 			(rule) => rule.test && rule.test.toString().includes(".css")
@@ -52,12 +53,12 @@ const config: StorybookConfig = {
 		return config;
 	},
 
-    docs: {
-        autodocs: true
-    },
+	docs: {
+		autodocs: true,
+	},
 
-    typescript: {
-        reactDocgen: "react-docgen-typescript"
-    }
+	typescript: {
+		reactDocgen: "react-docgen-typescript",
+	},
 };
 export default config;

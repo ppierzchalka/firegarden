@@ -3,6 +3,7 @@ import "../../tailwind-config/globals.css";
 import "./storybook.css";
 import React from "react";
 import { FiregardenProvider } from "../components/firegarden-provider";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 const preview: Preview = {
 	parameters: {
@@ -12,24 +13,27 @@ const preview: Preview = {
 				date: /Date$/i,
 			},
 		},
-		backgrounds: {
+		themes: {
 			default: "dark",
-			values: [
-				{
-					name: "dark",
-					value: "hsl(222.2 84% 4.9%)",
-				},
-				{
-					name: "light",
-					value: "#ffffff",
-				},
+			list: [
+				{ name: "light", class: "light", color: "#ffffff" },
+				{ name: "dark", class: "dark", color: "hsl(222.2 84% 4.9%)" },
 			],
 		},
+		backgrounds: { disable: true },
 	},
 	decorators: [
+		// Apply the theme class to the html element
+		withThemeByClassName({
+			themes: {
+				light: "light",
+				dark: "dark",
+			},
+			defaultTheme: "light",
+		}),
 		(Story) => {
 			return (
-				<FiregardenProvider>
+				<FiregardenProvider defaultTheme="system">
 					<div className="font-sans p-4">
 						<Story />
 					</div>
