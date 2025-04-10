@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
 import { FiregardenProvider } from "@firegarden/ui";
-import { geistMono, geistSans } from "./fonts";
 
 export const metadata: Metadata = {
 	title: "Firegarden",
@@ -14,15 +13,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+		<html lang="en">
 			<body>
-				<FiregardenProvider
-					fonts={{
-						geistSans,
-						geistMono,
-					}}>
-					{children}
-				</FiregardenProvider>
+				<FiregardenProvider>{children}</FiregardenProvider>
 			</body>
 		</html>
 	);
