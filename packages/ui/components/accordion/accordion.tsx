@@ -1,19 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
-
-// Context to manage the selected accordion item
-type AccordionContextType = {
-	selectedItem: string | null;
-	setSelectedItem: (id: string | null) => void;
-};
-
-const AccordionContext = createContext<AccordionContextType | undefined>(
-	undefined
-);
-
+import {
+	ReactNode,
+	isValidElement,
+	Children,
+	useState,
+	cloneElement,
+} from "react";
+import { AccordionContext } from "./accordion.hook";
 export interface AccordionProps {
-	children: React.ReactNode;
+	children: ReactNode;
 	className?: string;
 }
 
@@ -22,10 +18,10 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 	let firstItemId: string | null = null;
 
 	// Safely extract the first id or title from children
-	React.Children.forEach(children, (child) => {
+	Children.forEach(children, (child) => {
 		if (
 			firstItemId === null &&
-			React.isValidElement(child) &&
+			isValidElement(child) &&
 			(child.props.id || child.props.title)
 		) {
 			firstItemId = child.props.id || child.props.title;
@@ -59,28 +55,28 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 
 						<div className="grid grid-cols-1 md:grid-cols-4">
 							<div className="border-r border-blue/20 p-2">
-								{React.Children.map(children, (child) => {
-									if (!React.isValidElement(child)) return null;
+								{Children.map(children, (child) => {
+									if (!isValidElement(child)) return null;
 
 									// Pass props directly without typecasting
 									const titleProps = {
 										renderTitle: true,
 										renderContent: false,
 									};
-									return React.cloneElement(child, titleProps);
+									return cloneElement(child, titleProps);
 								})}
 							</div>
 
 							<div className="p-3 col-span-3 min-h-[150px]">
-								{React.Children.map(children, (child) => {
-									if (!React.isValidElement(child)) return null;
+								{Children.map(children, (child) => {
+									if (!isValidElement(child)) return null;
 
 									// Pass props directly without typecasting
 									const contentProps = {
 										renderTitle: false,
 										renderContent: true,
 									};
-									return React.cloneElement(child, contentProps);
+									return cloneElement(child, contentProps);
 								})}
 							</div>
 						</div>
@@ -95,11 +91,3 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 		</AccordionContext.Provider>
 	);
 }
-
-export const useAccordion = () => {
-	const context = useContext(AccordionContext);
-	if (!context) {
-		throw new Error("useAccordion must be used within an AccordionProvider");
-	}
-	return context;
-};

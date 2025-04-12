@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import { useAccordion } from "./accordion";
+import { useAccordion } from "./accordion.hook";
 
 export interface AccordionItemProps {
 	title: string;

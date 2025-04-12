@@ -1,5 +1,3 @@
-"use client";
-
 import { ThemeProvider } from "./theme";
 
 export interface FiregardenProviderProps {
