@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
 import { FiregardenProvider, HydrationSuppressor } from "@firegarden/ui";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
 	title: "Przemysław Pierzchałka - ppierzchalka.is-a.dev",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
 	return (
 		<html lang="en">
