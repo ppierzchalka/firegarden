@@ -2,7 +2,7 @@
 [build]
   base = "/"
   # This command will build all apps in the monorepo, and prepare the deployment
-  command = "pnpm install && pnpm turbo build && mkdir -p netlify-deploy && cp -R apps/firegarden-front/.next netlify-deploy/ && cp -R apps/firegarden-front/public netlify-deploy/"
+  command = "pnpm install && pnpm turbo build && mkdir -p netlify-deploy && cp -R apps/firegarden-front/.next/* netlify-deploy/ && cp -R apps/firegarden-front/public/* netlify-deploy/"
   # Deploy only the compiled output and public files
   publish = "netlify-deploy"
 
@@ -13,7 +13,7 @@
 
 # Production branch configuration - by default uses the main site settings above
 [context.production]
-  command = "pnpm install && pnpm turbo build --filter=firegarden-front && mkdir -p netlify-deploy && cp -R apps/firegarden-front/.next netlify-deploy/ && cp -R apps/firegarden-front/public netlify-deploy/"
+  command = "pnpm install && pnpm turbo build --filter=firegarden-front && mkdir -p netlify-deploy && cp -R apps/firegarden-front/.next/* netlify-deploy/ && cp -R apps/firegarden-front/public/* netlify-deploy/"
 
 # Specific branch configuration for CMS app - configure in Netlify to deploy to a separate site
 [context.cms]
