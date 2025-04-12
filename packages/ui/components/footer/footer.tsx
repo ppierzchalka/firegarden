@@ -14,9 +14,9 @@ export const Footer = ({ left, right, children }: FooterProps) => {
 					{left}
 				</div>
 				<p className="text-sm text-muted-foreground tracking-wide flex items-center">
-					<span className="text-blue mr-1">&lt;</span>
+					<span className="text-primary mr-1">&lt;</span>
 					{children}
-					<span className="text-blue ml-1">/&gt;</span>
+					<span className="text-primary ml-1">/&gt;</span>
 				</p>
 				<div className="hidden md:block text-xs text-muted-foreground">
 					{right}

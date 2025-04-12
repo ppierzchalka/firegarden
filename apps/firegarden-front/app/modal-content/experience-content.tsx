@@ -19,7 +19,7 @@ export const ExperienceContent = () => {
 
 	return (
 		<div className="font-code text-foreground/90 terminal-container">
-			<div className="text-xs text-blue mb-4">
+			<div className="text-xs text-primary mb-4">
 				<span>$ cat experience.log</span>
 			</div>
 
@@ -31,14 +31,14 @@ export const ExperienceContent = () => {
 				}}>
 				<div className="border-b border-blue/10 pb-4">
 					<div className="flex items-start">
-						<span className="text-blue mr-2 mt-1">|</span>
+						<span className="text-primary mr-2 mt-1">|</span>
 						<div>
 							<h3 className="text-lg font-medium tracking-wide text-foreground">
 								Senior Front-end Developer
 							</h3>
 							<div className="text-sm text-muted-foreground mb-2">
-								<span className="text-blue mr-1">&gt;</span> TechCorp • 2021 -
-								Present
+								<span className="text-primary mr-1">&gt;</span> TechCorp • 2021
+								- Present
 							</div>
 							<p>
 								Led the development of the company's design system, improving
@@ -51,14 +51,14 @@ export const ExperienceContent = () => {
 
 				<div className="border-b border-blue/10 pb-4">
 					<div className="flex items-start">
-						<span className="text-blue mr-2 mt-1">|</span>
+						<span className="text-primary mr-2 mt-1">|</span>
 						<div>
 							<h3 className="text-lg font-medium tracking-wide text-foreground">
 								Front-end Developer
 							</h3>
 							<div className="text-sm text-muted-foreground mb-2">
-								<span className="text-blue mr-1">&gt;</span> WebSolutions • 2019
-								- 2021
+								<span className="text-primary mr-1">&gt;</span> WebSolutions •
+								2019 - 2021
 							</div>
 							<p>
 								Developed and maintained multiple client websites using React
@@ -71,13 +71,13 @@ export const ExperienceContent = () => {
 
 				<div className="border-b border-blue/10 pb-4">
 					<div className="flex items-start">
-						<span className="text-blue mr-2 mt-1">|</span>
+						<span className="text-primary mr-2 mt-1">|</span>
 						<div>
 							<h3 className="text-lg font-medium tracking-wide text-foreground">
 								Junior Developer
 							</h3>
 							<div className="text-sm text-muted-foreground mb-2">
-								<span className="text-blue mr-1">&gt;</span> DigitalAgency •
+								<span className="text-primary mr-1">&gt;</span> DigitalAgency •
 								2018 - 2019
 							</div>
 							<p>
@@ -92,8 +92,8 @@ export const ExperienceContent = () => {
 
 			{typingComplete && (
 				<div className="mt-4 text-xs text-muted-foreground flex items-center">
-					<span className="text-blue mr-2">$</span>
-					<span className="inline-block w-2 h-4 bg-blue animate-blink"></span>
+					<span className="text-primary mr-2">$</span>
+					<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
 				</div>
 			)}
 		</div>

@@ -18,7 +18,7 @@ export const SlidesNav = ({
 					<span
 						className={`absolute transition-all duration-500 ${
 							activeSlide === index
-								? "text-blue opacity-100 left-0"
+								? "text-primary opacity-100 left-0"
 								: "opacity-0 -left-4"
 						}`}>
 						&gt;

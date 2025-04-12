@@ -44,7 +44,7 @@ export const InterestsContent = () => {
 
 	return (
 		<div className="font-code text-foreground/90 terminal-container">
-			<div className="text-xs text-blue mb-4">
+			<div className="text-xs text-primary mb-4">
 				<span>$ browse interests.dat</span>
 			</div>
 
@@ -55,8 +55,8 @@ export const InterestsContent = () => {
 					opacity: isVisible ? 1 : 0,
 				}}>
 				<div className="border border-blue/20 mb-4">
-					<div className="bg-blue/10 border-b border-blue/20 px-2 py-1 text-sm">
-						<span className="text-blue mr-1">$</span> Interests Catalog
+					<div className="bg-primary/10 border-b border-blue/20 px-2 py-1 text-sm">
+						<span className="text-primary mr-1">$</span> Interests Catalog
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-4">
@@ -65,9 +65,9 @@ export const InterestsContent = () => {
 								<div
 									key={index}
 									onClick={() => setSelectedItem(index)}
-									className={`py-1 px-2 cursor-pointer flex items-center ${selectedItem === index ? "bg-blue/20 text-foreground" : "hover:bg-blue/10 text-muted-foreground"}`}>
+									className={`py-1 px-2 cursor-pointer flex items-center ${selectedItem === index ? "bg-primary/20 text-foreground" : "hover:bg-primary/10 text-muted-foreground"}`}>
 									{selectedItem === index && (
-										<ChevronRight className="w-3 h-3 text-blue mr-1" />
+										<ChevronRight className="w-3 h-3 text-primary mr-1" />
 									)}
 									<span>{item.title}</span>
 								</div>
@@ -76,7 +76,7 @@ export const InterestsContent = () => {
 
 						<div className="p-3 col-span-3 min-h-[150px]">
 							<h3 className="text-lg font-medium mb-2 text-foreground border-b border-blue/10 pb-1">
-								<span className="text-blue mr-1">&gt;</span>{" "}
+								<span className="text-primary mr-1">&gt;</span>{" "}
 								{items[selectedItem]?.title}
 							</h3>
 							<p>{items[selectedItem]?.content}</p>
@@ -87,8 +87,8 @@ export const InterestsContent = () => {
 
 			{typingComplete && (
 				<div className="mt-4 text-xs text-muted-foreground flex items-center">
-					<span className="text-blue mr-2">$</span>
-					<span className="inline-block w-2 h-4 bg-blue animate-blink"></span>
+					<span className="text-primary mr-2">$</span>
+					<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
 				</div>
 			)}
 		</div>

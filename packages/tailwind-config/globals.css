@@ -32,6 +32,8 @@
 		--input: 120 30% 75%;
 		--ring: 120 100% 36%;
 
+		/* Glow effect for green theme */
+		--glow-color: 120 100% 50% / 0.35;
 		--radius: 0rem;
 	}
 
@@ -143,11 +145,23 @@
 
 	/* Retro terminal effects */
 	.retro-glow {
-		text-shadow: 0 0 2px rgba(0, 187, 0, 0.8);
+		text-shadow: 0 0 5px hsla(var(--primary) / 0.6);
 	}
 
 	.retro-green {
-		color: rgb(0, 187, 0);
+		color: hsl(var(--primary));
+	}
+
+	.theme-element {
+		@apply text-primary border-primary/30 transition-colors duration-300;
+	}
+
+	.theme-element:hover {
+		@apply border-primary/50;
+	}
+
+	.theme-glow {
+		text-shadow: 0 0 8px hsla(var(--primary) / 0.6);
 	}
 
 	.retro-screen {

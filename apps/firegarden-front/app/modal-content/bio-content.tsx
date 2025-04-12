@@ -20,7 +20,7 @@ export const BioContent = () => {
 
 	return (
 		<div className="font-code text-foreground/90 terminal-container">
-			<div className="text-xs text-blue mb-4">
+			<div className="text-xs text-primary mb-4">
 				<span>$ cat about-me.txt</span>
 			</div>
 
@@ -52,8 +52,8 @@ export const BioContent = () => {
 
 			{typingComplete && (
 				<div className="mt-4 text-xs text-muted-foreground flex items-center">
-					<span className="text-blue mr-2">$</span>
-					<span className="inline-block w-2 h-4 bg-blue animate-blink"></span>
+					<span className="text-primary mr-2">$</span>
+					<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
 				</div>
 			)}
 		</div>
