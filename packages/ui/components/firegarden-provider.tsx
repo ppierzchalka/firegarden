@@ -4,12 +4,12 @@ import { ThemeProvider } from "./theme";
 
 export interface FiregardenProviderProps {
 	children: React.ReactNode;
-	defaultTheme?: "light" | "dark" | "system";
+	defaultTheme?: "light" | "dark";
 }
 
 export const FiregardenProvider = ({
 	children,
-	defaultTheme = "system",
+	defaultTheme = "dark",
 }: FiregardenProviderProps) => (
 	<ThemeProvider defaultTheme={defaultTheme}>{children}</ThemeProvider>
 );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
-import { FiregardenProvider } from "@firegarden/ui";
+import { FiregardenProvider, HydrationSuppressor } from "@firegarden/ui";
 import { geistMono, geistSans } from "./fonts";
 
 export const metadata: Metadata = {
@@ -15,14 +15,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-			<body>
-				<FiregardenProvider
-					fonts={{
-						geistSans,
-						geistMono,
-					}}>
-					{children}
-				</FiregardenProvider>
+			<body suppressHydrationWarning>
+				<HydrationSuppressor>
+					<FiregardenProvider>{children}</FiregardenProvider>
+				</HydrationSuppressor>
 			</body>
 		</html>
 	);

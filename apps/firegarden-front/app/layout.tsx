@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
-import { FiregardenProvider } from "@firegarden/ui";
+import { FiregardenProvider, HydrationSuppressor } from "@firegarden/ui";
 
 export const metadata: Metadata = {
-	title: "Firegarden",
-	description: "Firegarden Frontend Application",
+	title: "Przemysław Pierzchałka - ppierzchalka.is-a.dev",
+	description: "Przemysław Pierzchałka - Frontend Developer",
 };
 
 export default function RootLayout({
@@ -14,8 +14,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body>
-				<FiregardenProvider>{children}</FiregardenProvider>
+			<body suppressHydrationWarning>
+				<HydrationSuppressor>
+					<FiregardenProvider>{children}</FiregardenProvider>
+				</HydrationSuppressor>
 			</body>
 		</html>
 	);

@@ -26,8 +26,7 @@ export const headerRight = (
 export const footerLeft = (
 	<>
 		<span className="text-primary">$</span>{" "}
-		<span className="text-foreground/70">stack:</span> react, typescript,
-		next.js
+		<span className="text-foreground/70">stack:</span> react, rxjs, typescript
 	</>
 );
 
@@ -62,7 +61,7 @@ export default function Home() {
 			<Header logo={headerLogo} right={headerRight} />
 			<main className="flex-1 relative overflow-hidden crt-effect">
 				<Slider>
-					<Hero id="hero" image={image} />
+					<Hero id="hero" image={image} title={"Przemysław Pierzchałka"} />
 					<Slide id="about" title="About Me">
 						<BioContent />
 					</Slide>

@@ -6,6 +6,7 @@ export * from "./components/hero";
 export * from "./components/slider";
 export * from "./components/theme";
 export * from "./components/firegarden-provider";
+export * from "./components/hydration-suppressor";
 
 // Export utilities
 export { cn } from "./lib/utils";

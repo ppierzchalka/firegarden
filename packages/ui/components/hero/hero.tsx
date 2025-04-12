@@ -4,7 +4,15 @@ import { useState, useEffect, ReactNode } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "../button";
 
-export const Hero = ({ id, image }: { id: string; image: ReactNode }) => {
+export const Hero = ({
+	id,
+	image,
+	title,
+}: {
+	id: string;
+	image: ReactNode;
+	title: string;
+}) => {
 	const [typedText, setTypedText] = useState("");
 	const fullText =
 		"Front-end developer passionate about creating beautiful, accessible, and performant web experiences.";
@@ -33,7 +41,7 @@ export const Hero = ({ id, image }: { id: string; image: ReactNode }) => {
 					className="relative inline-block mb-2 px-4 py-1 bg-primary/5 border-l-2 border-primary/30 animate-crt-on theme-glow"
 					style={{ animationDelay: "300ms" }}>
 					<h1 className="text-4xl font-bold tracking-tight md:text-5xl font-code text-foreground">
-						Przemyslaw Pierzchalka
+						{title}
 					</h1>
 				</div>
 
