@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 /**
  * BrowserExtensionSafeWrapper component addresses hydration errors
@@ -10,11 +10,7 @@ import React, { useEffect, useState } from "react";
  * rendering strategy for the affected content, which avoids the hydration
  * mismatch entirely.
  */
-export function HydrationSuppressor({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export function HydrationSuppressor({ children }: { children: ReactNode }) {
 	// Only render children on the client side
 	const [isMounted, setIsMounted] = useState(false);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import { useBreakpoint } from "../../lib/breakpoint.hook";
 import { cn } from "../../lib/utils";
 
@@ -12,7 +12,7 @@ export interface HeroTextProps {
 	/** Additional CSS classes */
 	className?: string;
 	/** Additional inline styles */
-	style?: React.CSSProperties;
+	style?: CSSProperties;
 }
 
 export function HeroText({ title, content, className, style }: HeroTextProps) {

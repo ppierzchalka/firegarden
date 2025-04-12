@@ -1,8 +1,10 @@
-import { Children, isValidElement } from "react";
-import { Slides } from "./slider.types";
+import { Children, isValidElement, ReactElement } from "react";
+import { SlideProps, Slides } from "./slider.types";
 
-export const childrenToSlides = (children: React.ReactNode): Slides => {
-	const slidesObj: Record<string, React.ReactNode> = {};
+export const childrenToSlides = (
+	children: ReactElement<SlideProps>[]
+): Slides => {
+	const slidesObj: Record<string, ReactElement<SlideProps>> = {};
 
 	Children.forEach(children, (child) => {
 		if (!isValidElement(child)) return;

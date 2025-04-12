@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
 import { FiregardenProvider, HydrationSuppressor } from "@firegarden/ui";
 import { geistMono, geistSans } from "./fonts";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
 	title: "Firegarden CMS",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
 	return (
 		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>

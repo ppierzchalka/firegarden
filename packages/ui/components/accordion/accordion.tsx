@@ -1,15 +1,16 @@
 "use client";
 
 import {
-	ReactNode,
 	isValidElement,
 	Children,
 	useState,
 	cloneElement,
+	ReactElement,
 } from "react";
 import { AccordionContext } from "./accordion.hook";
+import { AccordionItemProps } from "./accordion-item";
 export interface AccordionProps {
-	children: ReactNode;
+	children: ReactElement<AccordionItemProps>[];
 	className?: string;
 }
 

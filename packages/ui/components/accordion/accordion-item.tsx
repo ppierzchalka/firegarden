@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import { ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
 import { useAccordion } from "./accordion.hook";
 
 export interface AccordionItemProps {
 	title: string;
-	children: React.ReactNode;
+	children: ReactNode;
 	id?: string;
 	renderTitle?: boolean;
 	renderContent?: boolean;

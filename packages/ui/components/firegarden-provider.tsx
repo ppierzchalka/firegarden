@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import { ThemeProvider } from "./theme";
 
 export interface FiregardenProviderProps {
-	children: React.ReactNode;
+	children: ReactNode;
 	defaultTheme?: "light" | "dark";
 }
 

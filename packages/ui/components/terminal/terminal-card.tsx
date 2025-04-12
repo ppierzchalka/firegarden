@@ -1,11 +1,11 @@
-import React from "react";
+import { ReactNode } from "react";
 import { cn } from "../../lib/utils";
 
 export interface TerminalCardProps {
 	/** The command shown at the top of the terminal */
 	command: string;
 	/** The main content to display */
-	children: React.ReactNode;
+	children: ReactNode;
 	/** Optional additional class names */
 	className?: string;
 }

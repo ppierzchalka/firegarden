@@ -1,0 +1,21 @@
+# Main site configuration
+[build]
+  base = "/"
+  # This command will build all apps in the monorepo
+  command = "pnpm install && pnpm turbo build"
+  # For monorepo, we need to specify where the built files are located
+  publish = "apps/firegarden-front/.next"
+
+# Environment variables that apply to all contexts
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--version" # Prevents Netlify npm install
+
+# Production branch configuration - by default uses the main site settings above
+[context.production]
+  command = "pnpm install && pnpm turbo build --filter=firegarden-front"
+
+# Specific branch configuration for CMS app - configure in Netlify to deploy to a separate site
+[context.cms]
+  command = "pnpm install && pnpm turbo build --filter=firegarden-cms"
+  publish = "apps/firegarden-cms/.next"

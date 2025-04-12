@@ -1,12 +1,23 @@
-import React from "react";
+import {
+	AriaAttributes,
+	cloneElement,
+	ForwardRefExoticComponent,
+	ReactElement,
+	RefAttributes,
+} from "react";
 import { Button } from "../button";
 import { cn } from "../../lib/utils";
+import { LucideProps } from "lucide-react";
 
 export interface IconButtonProps {
 	/** The URL the button should link to (not needed if onClick is provided) */
 	href?: string;
 	/** The icon to display in the button */
-	icon: React.ReactNode;
+	icon: ReactElement<
+		ForwardRefExoticComponent<
+			Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+		> & { className?: string }
+	>;
 	/** The accessible label for the button */
 	label: string;
 	/** Whether the link should open in a new tab */
@@ -16,7 +27,7 @@ export interface IconButtonProps {
 	/** Optional click handler for when the button is used as a button rather than a link */
 	onClick?: () => void;
 	/** Optional ARIA attributes */
-	ariaProps?: React.AriaAttributes & {
+	ariaProps?: AriaAttributes & {
 		role?: string;
 		"aria-checked"?: boolean;
 		"aria-pressed"?: boolean;
@@ -33,7 +44,7 @@ export function IconButton({
 	ariaProps,
 }: IconButtonProps) {
 	// Handle the icon styling consistently
-	const styledIcon = React.cloneElement(icon as React.ReactElement, {
+	const styledIcon = cloneElement(icon, {
 		className:
 			"w-5 h-5 text-primary group-hover:text-foreground transition-colors duration-300",
 	});
