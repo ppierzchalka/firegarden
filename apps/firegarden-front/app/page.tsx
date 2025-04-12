@@ -7,6 +7,7 @@ import {
 	HeaderLogo,
 	HeaderRight,
 	heroImage,
+	HeroContent,
 	InterestsContent,
 } from "./page-content";
 
@@ -16,7 +17,9 @@ export default function Home() {
 			<Header logo={<HeaderLogo />} right={<HeaderRight />} />
 			<main className="flex-1 relative overflow-hidden crt-effect">
 				<Slider>
-					<Hero id="hero" image={heroImage} title={"Przemysław Pierzchałka"} />
+					<Hero id="hero" image={heroImage} title={"Przemysław Pierzchałka"}>
+						<HeroContent />
+					</Hero>
 					<Slide id="about" title="About Me">
 						<BioContent />
 					</Slide>

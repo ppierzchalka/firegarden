@@ -1,10 +1,8 @@
-export const BioContent = () => (
-	<div className="font-code text-foreground/90 terminal-container">
-		<div className="text-xs text-primary mb-4">
-			<span>$ cat about-me.txt</span>
-		</div>
+import { TerminalCard } from "@firegarden/ui";
 
-		<div className={`space-y-4 terminal-text`}>
+export const BioContent = () => (
+	<TerminalCard command="$ cat about-me.txt">
+		<div className="space-y-4">
 			<p>
 				I'm a front-end developer with 5 years of experience building
 				responsive, accessible, and performant web applications. I specialize in
@@ -23,10 +21,5 @@ export const BioContent = () => (
 				experimenting with new cooking recipes.
 			</p>
 		</div>
-
-		<div className="mt-4 text-xs text-muted-foreground flex items-center">
-			<span className="text-primary mr-2">$</span>
-			<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
-		</div>
-	</div>
+	</TerminalCard>
 );

@@ -4,3 +4,4 @@ export * from "./interests-content";
 export * from "./hero-image";
 export * from "./header-content";
 export * from "./footer-content";
+export * from "./hero-content";
