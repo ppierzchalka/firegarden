@@ -4,6 +4,7 @@ import {
 	ExperienceContent,
 	InterestsContent,
 } from "./modal-content";
+import Image from "next/image";
 
 export const headerLogo = (
 	<>
@@ -41,13 +42,27 @@ export const footerRight = (
 
 export const children = "made by me";
 
+export const image = (
+	<div className="image-container mx-auto w-[224px] h-[224px] flex items-center justify-center">
+		<Image
+			src="/IMG_5423.JPEG"
+			alt="Profile photo of a man with a beard in a green t-shirt"
+			width={224}
+			height={224}
+			className="object-cover w-full h-full"
+			priority
+			aria-label="Profile photo"
+		/>
+	</div>
+);
+
 export default function Home() {
 	return (
 		<div className="flex flex-col h-screen bg-background font-code relative overflow-hidden transition-colors duration-300">
 			<Header logo={headerLogo} right={headerRight} />
 			<main className="flex-1 relative overflow-hidden crt-effect">
 				<Slider>
-					<Hero id="hero" />
+					<Hero id="hero" image={image} />
 					<Slide id="about" title="About Me">
 						<BioContent />
 					</Slide>

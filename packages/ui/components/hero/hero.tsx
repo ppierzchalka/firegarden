@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect, ReactNode } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "../button";
 
-export const Hero = ({ id }: { id: string }) => {
+export const Hero = ({ id, image }: { id: string; image: ReactNode }) => {
 	const [typedText, setTypedText] = useState("");
 	const fullText =
 		"Front-end developer passionate about creating beautiful, accessible, and performant web experiences.";
@@ -23,18 +22,11 @@ export const Hero = ({ id }: { id: string }) => {
 		<div
 			id={id}
 			className="h-full w-full flex items-center justify-center shrink-0">
-			<div className="container max-w-4xl px-4 py-8 mx-auto text-center relative z-10 crt-effect">
+			<div className="container max-w-4xl px-4 py-8 mx-auto text-center relative z-10">
 				<div className="relative mx-auto mb-8 overflow-hidden w-44 h-44 md:w-56 md:h-56 border-2 border-primary/30 animate-crt-on">
 					<div className="absolute inset-0 bg-scanlines opacity-10 z-20"></div>
 					<div className="absolute inset-0 bg-noise opacity-5 z-10"></div>
-					<Image
-						src="/placeholder.svg?height=224&width=224"
-						alt="Profile"
-						width={224}
-						height={224}
-						className="object-cover"
-						priority
-					/>
+					{image}
 				</div>
 
 				<div
