@@ -45,7 +45,7 @@ export default function Home() {
 	return (
 		<div className="flex flex-col h-screen bg-background font-code relative overflow-hidden transition-colors duration-300">
 			<Header logo={headerLogo} right={headerRight} />
-			<main className="flex-1 relative overflow-hidden">
+			<main className="flex-1 relative overflow-hidden crt-effect">
 				<Slider>
 					<Hero id="hero" />
 					<Slide id="about" title="About Me">
