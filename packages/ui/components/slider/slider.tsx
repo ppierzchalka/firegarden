@@ -5,8 +5,9 @@ import { useContentSlider } from "./slider.hook";
 import { SliderProps } from "./slider.types";
 import { childrenToSlides } from "./slider.utils";
 import { SlidesNav } from "./slides-nav";
+import { useBreakpoint } from "../../lib/breakpoint.hook";
 
-export const Slider = ({ children }: SliderProps) => {
+export const DesktopSlider = ({ children }: SliderProps) => {
 	const slides = childrenToSlides(children);
 	const { activeSlide, isTransitioning, changeSlide } =
 		useContentSlider(slides);
@@ -29,4 +30,16 @@ export const Slider = ({ children }: SliderProps) => {
 			</div>
 		</div>
 	);
+};
+
+export const Slider = ({ children }: SliderProps) => {
+	const { isBelowMd } = useBreakpoint();
+
+	// On smaller screens (below md breakpoint), return children directly
+	if (isBelowMd) {
+		return <>{children}</>;
+	}
+
+	// For medium screens and above, use the slider with scroll jacking
+	return <DesktopSlider>{children}</DesktopSlider>;
 };

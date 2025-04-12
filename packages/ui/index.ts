@@ -10,4 +10,5 @@ export * from "./components/hydration-suppressor";
 
 // Export utilities
 export { cn } from "./lib/utils";
+export { useBreakpoint } from "./lib/breakpoint.hook";
 export { useModalStore } from "./lib/modal-store";

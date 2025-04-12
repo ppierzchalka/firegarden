@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 
 export const InterestsContent = () => {
-	const [isVisible, setIsVisible] = useState(false);
-	const [typingComplete, setTypingComplete] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(0);
 
 	const items = [
@@ -31,29 +29,13 @@ export const InterestsContent = () => {
 		},
 	];
 
-	useEffect(() => {
-		setIsVisible(true);
-
-		// Set typing complete after animation duration
-		const timer = setTimeout(() => {
-			setTypingComplete(true);
-		}, 1000);
-
-		return () => clearTimeout(timer);
-	}, []);
-
 	return (
 		<div className="font-code text-foreground/90 terminal-container">
 			<div className="text-xs text-primary mb-4">
 				<span>$ browse interests.dat</span>
 			</div>
 
-			<div
-				className={`terminal-text ${isVisible ? "fade-in" : ""}`}
-				style={{
-					animationDuration: "1s",
-					opacity: isVisible ? 1 : 0,
-				}}>
+			<div className={`terminal-text`}>
 				<div className="border border-blue/20 mb-4">
 					<div className="bg-primary/10 border-b border-blue/20 px-2 py-1 text-sm">
 						<span className="text-primary mr-1">$</span> Interests Catalog
@@ -85,12 +67,10 @@ export const InterestsContent = () => {
 				</div>
 			</div>
 
-			{typingComplete && (
-				<div className="mt-4 text-xs text-muted-foreground flex items-center">
-					<span className="text-primary mr-2">$</span>
-					<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
-				</div>
-			)}
+			<div className="mt-4 text-xs text-muted-foreground flex items-center">
+				<span className="text-primary mr-2">$</span>
+				<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
+			</div>
 		</div>
 	);
 };

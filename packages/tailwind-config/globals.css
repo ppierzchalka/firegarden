@@ -73,9 +73,27 @@
 		@apply border-border;
 	}
 
+	html {
+		@apply overflow-hidden;
+	}
+
+	body {
+		@apply overflow-y-scroll overflow-x-hidden;
+	}
+
+	/* Medium screens and above */
+	@screen md {
+		html {
+			@apply overflow-hidden;
+		}
+
+		body {
+			@apply overflow-hidden;
+		}
+	}
+
 	html,
 	body {
-		@apply overflow-hidden;
 		height: 100%;
 		margin: 0;
 		padding: 0;

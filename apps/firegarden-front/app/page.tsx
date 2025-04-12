@@ -12,7 +12,7 @@ import {
 
 export default function Home() {
 	return (
-		<div className="flex flex-col h-screen bg-background font-code relative overflow-hidden transition-colors duration-300">
+		<div className="flex flex-col md:h-screen bg-background font-code relative overflow-hidden transition-colors duration-300">
 			<Header logo={<HeaderLogo />} right={<HeaderRight />} />
 			<main className="flex-1 relative overflow-hidden crt-effect">
 				<Slider>

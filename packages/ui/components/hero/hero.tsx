@@ -3,6 +3,10 @@
 import { useState, useEffect, ReactNode } from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "../button";
+import { useBreakpoint } from "../../lib/breakpoint.hook";
+
+const fullText =
+	"Front-end developer passionate about creating beautiful, accessible, and performant web experiences.";
 
 export const Hero = ({
 	id,
@@ -13,18 +17,17 @@ export const Hero = ({
 	image: ReactNode;
 	title: string;
 }) => {
+	const { isBelowMd } = useBreakpoint();
 	const [typedText, setTypedText] = useState("");
-	const fullText =
-		"Front-end developer passionate about creating beautiful, accessible, and performant web experiences.";
 
 	useEffect(() => {
-		if (typedText.length < fullText.length) {
+		if (!isBelowMd && typedText.length < fullText.length) {
 			const timeout = setTimeout(() => {
 				setTypedText(fullText.slice(0, typedText.length + 1));
 			}, 50);
 			return () => clearTimeout(timeout);
 		}
-	}, [typedText, fullText]);
+	}, [typedText, fullText, isBelowMd]);
 
 	return (
 		<div
@@ -48,20 +51,6 @@ export const Hero = ({
 				</div>
 
 				<div className="w-24 h-px mx-auto my-4 bg-primary/40 theme-glow"></div>
-
-				<div
-					className="md:max-w-xl lg:max-w-2xl mx-auto mb-6 text-muted-foreground md:text-lg font-code relative bg-background/30 border border-primary/10 p-3 animate-crt-on"
-					style={{ animationDelay: "600ms" }}>
-					<div className="flex items-center text-xs text-primary mb-1 border-b border-primary/10 pb-1">
-						<span className="mr-1">+---[ bio.txt ]---+</span>
-					</div>
-					<p className="text-left">
-						<span className="text-primary">$ </span>
-						{typedText}
-						<span
-							className={`inline-block w-2 h-4 bg-primary ml-1 ${typedText.length === fullText.length ? "animate-blink" : "opacity-0"}`}></span>
-					</p>
-				</div>
 
 				<div
 					className="flex items-center justify-center mb-8 space-x-4 animate-crt-on"
@@ -102,6 +91,20 @@ export const Hero = ({
 							<span className="sr-only">Email</span>
 						</a>
 					</Button>
+				</div>
+
+				<div
+					className="md:max-w-xl lg:max-w-2xl mx-auto mb-6 text-muted-foreground md:text-lg font-code relative bg-background/30 border border-primary/10 p-3"
+					style={{ animationDelay: "600ms" }}>
+					<div className="flex items-center text-xs text-primary mb-1 border-b border-primary/10 pb-1">
+						<span className="mr-1">+---[ bio.txt ]---+</span>
+					</div>
+					<p className="text-left">
+						<span className="text-primary">$ </span>
+						{isBelowMd ? fullText : typedText}
+						<span
+							className={`inline-block w-2 h-4 bg-primary ml-1 ${typedText.length === fullText.length ? "animate-blink" : "opacity-0"}`}></span>
+					</p>
 				</div>
 			</div>
 		</div>
