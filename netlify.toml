@@ -11,18 +11,32 @@
     if [ "$SITE_APP" = "cms" ]; then
       echo "Building CMS app..."
       APP_DIR="apps/firegarden-cms"
+      APP_NAME="firegarden-cms"
     else
       echo "Building Frontend app..."
       APP_DIR="apps/firegarden-front"
+      APP_NAME="firegarden-front"
     fi
     
-    # Build the selected app
-    pnpm turbo build --filter=$APP_DIR
+    # Build the selected app using package name, not directory
+    pnpm turbo build --filter=$APP_NAME
     
     # Prepare deployment directory
     mkdir -p netlify-deploy
-    cp -R $APP_DIR/.next/* netlify-deploy/
-    cp -R $APP_DIR/public/* netlify-deploy/
+    # Verify that .next directory exists before copying
+    if [ -d "$APP_DIR/.next" ]; then
+      cp -R $APP_DIR/.next/* netlify-deploy/
+    else
+      echo "Error: Build output directory $APP_DIR/.next not found"
+      exit 1
+    fi
+    
+    # Verify that public directory exists before copying
+    if [ -d "$APP_DIR/public" ]; then
+      cp -R $APP_DIR/public/* netlify-deploy/
+    else
+      echo "Warning: Public directory $APP_DIR/public not found"
+    fi
   """
   
   # Deploy directory containing only the compiled output and static assets
