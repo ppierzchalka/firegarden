@@ -30,11 +30,13 @@ export const Hero = ({
 		<div
 			id={id}
 			className="h-full w-full flex items-center justify-center shrink-0">
-			<div className="container max-w-4xl px-4 py-8 mx-auto text-center relative z-10">
-				<div className="relative mx-auto mb-8 overflow-hidden w-44 h-44 md:w-56 md:h-56 border-2 border-primary/30 animate-crt-on">
+			<div className="container max-w-[85%] sm:max-w-[80%] md:max-w-3xl lg:max-w-4xl px-4 py-8 mx-auto text-center relative z-10">
+				<div className="relative mx-auto mb-8 overflow-hidden w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 border-2 border-primary/30 animate-crt-on">
 					<div className="absolute inset-0 bg-scanlines opacity-10 z-20"></div>
 					<div className="absolute inset-0 bg-noise opacity-5 z-10"></div>
-					{image}
+					<div className="w-full h-full flex items-center justify-center">
+						{image}
+					</div>
 				</div>
 
 				<div
@@ -48,7 +50,7 @@ export const Hero = ({
 				<div className="w-24 h-px mx-auto my-4 bg-primary/40 theme-glow"></div>
 
 				<div
-					className="max-w-2xl mx-auto mb-6 text-muted-foreground md:text-lg font-code relative bg-background/30 border border-primary/10 p-3 animate-crt-on"
+					className="md:max-w-xl lg:max-w-2xl mx-auto mb-6 text-muted-foreground md:text-lg font-code relative bg-background/30 border border-primary/10 p-3 animate-crt-on"
 					style={{ animationDelay: "600ms" }}>
 					<div className="flex items-center text-xs text-primary mb-1 border-b border-primary/10 pb-1">
 						<span className="mr-1">+---[ bio.txt ]---+</span>

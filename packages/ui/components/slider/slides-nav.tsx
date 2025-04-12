@@ -6,7 +6,7 @@ export const SlidesNav = ({
 	slides,
 	changeSlide,
 }: ContentSlider & { slides: Slides }) => (
-	<div className="fixed left-6 top-1/2 -translate-y-1/2 z-20 flex flex-col items-start space-y-6 md:block hidden">
+	<div className="fixed left-2 sm:left-4 md:left-6 lg:left-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-start space-y-6 md:block hidden">
 		{Object.keys(slides).map((slide, index) => (
 			<button
 				key={slide}
