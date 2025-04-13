@@ -28,6 +28,9 @@ yarn-error.log*
 # env files (can opt-in for commiting if needed)
 .env*
 
+# But allow example env files
+!.env.example
+
 # vercel
 .vercel
 

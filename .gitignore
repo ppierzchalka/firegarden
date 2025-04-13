@@ -12,6 +12,9 @@ node_modules
 .env.test.local
 .env.production.local
 
+# But allow example env files
+!.env.example
+
 # Testing
 coverage
 
