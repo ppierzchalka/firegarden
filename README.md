@@ -1,4 +1,4 @@
-# Firegarden
+# Firegarden test
 
 This repository contains a starter pack for creating your own digital business card/resume with plans to expand into a digital garden. Fork this template, customize it, and deploy it to GitHub Pages with your own custom domain.
 
