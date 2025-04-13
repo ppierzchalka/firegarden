@@ -27,7 +27,7 @@ export function HeroContent() {
 
 			<HeroText
 				title="bio.txt"
-				content="Front-end developer passionate about creating beautiful, accessible, and performant web experiences."
+				content="Frontend engineer focused on scalable architecture, AI integration, and mentoring, while balancing a love for cycling, story-driven games, and the craftsmanship of mechanical watches."
 				className="animate-crt-on"
 				style={{ animationDelay: "600ms" }}
 			/>

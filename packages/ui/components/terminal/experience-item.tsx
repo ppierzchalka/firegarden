@@ -13,17 +13,17 @@ export function ExperienceItem({
 	description,
 }: ExperienceItemProps) {
 	return (
-		<div className="border-b border-blue/10 pb-4">
+		<div className="border-b border-blue/10 pb-4 md:pb-3">
 			<div className="flex items-start">
 				<span className="text-primary mr-2 mt-1">|</span>
 				<div>
-					<h3 className="text-lg font-medium tracking-wide text-foreground">
+					<h3 className="text-lg md:text-base font-medium tracking-wide text-foreground">
 						{title}
 					</h3>
-					<div className="text-sm text-muted-foreground mb-2">
+					<div className="text-sm md:text-xs text-muted-foreground mb-2 md:mb-1">
 						<span className="text-primary mr-1">&gt;</span> {meta}
 					</div>
-					<p>{description}</p>
+					<p className="md:text-sm">{description}</p>
 				</div>
 			</div>
 		</div>
