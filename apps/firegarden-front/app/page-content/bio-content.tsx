@@ -1,7 +1,7 @@
 import { TerminalCard } from "@firegarden/ui";
 
 export const BioContent = () => (
-	<TerminalCard command="$ cat about-me.txt">
+	<TerminalCard command="$ cat about-me.txt" aria-label="About me section">
 		<div className="space-y-4">
 			<p>
 				I’m a frontend developer with over 6 years of experience building

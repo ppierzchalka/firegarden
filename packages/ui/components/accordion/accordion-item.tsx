@@ -24,27 +24,48 @@ export function AccordionItem({
 
 	if (renderTitle) {
 		return (
-			<div
+			<button
 				onClick={() => setSelectedItem(isSelected ? null : id)}
-				className={`py-1 px-2 cursor-pointer flex items-center ${
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						setSelectedItem(isSelected ? null : id);
+					}
+				}}
+				className={`py-1 px-2 cursor-pointer flex items-center w-full text-left ${
 					isSelected
 						? "bg-primary/20 text-foreground"
 						: "hover:bg-primary/10 text-muted-foreground"
-				}`}>
-				{isSelected && <ChevronRight className="w-3 h-3 text-primary mr-1" />}
+				}`}
+				aria-expanded={isSelected}
+				aria-controls={`accordion-content-${id}`}
+				id={`accordion-header-${id}`}>
+				{isSelected && (
+					<ChevronRight
+						className="w-3 h-3 text-primary mr-1"
+						aria-hidden="true"
+					/>
+				)}
 				<span>{title}</span>
-			</div>
+			</button>
 		);
 	}
 
 	if (renderContent && isSelected) {
 		return (
-			<>
+			<div
+				id={`accordion-content-${id}`}
+				aria-labelledby={`accordion-header-${id}`}
+				role="region"
+				tabIndex={0}>
 				<h3 className="text-lg font-medium mb-2 text-foreground border-b border-blue/10 pb-1">
-					<span className="text-primary mr-1">&gt;</span> {title}
+					<span className="text-primary mr-1" aria-hidden="true">
+						&gt;
+					</span>{" "}
+					{title}
 				</h3>
 				<div>{children}</div>
-			</>
+			</div>
 		);
 	}
 

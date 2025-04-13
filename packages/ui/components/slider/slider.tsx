@@ -13,7 +13,10 @@ export const DesktopSlider = ({ children }: SliderProps) => {
 		useContentSlider(slides);
 
 	return (
-		<div className="h-full w-full overflow-hidden">
+		<div
+			className="h-full w-full overflow-hidden"
+			role="region"
+			aria-roledescription="carousel">
 			<SlidesNav
 				slides={slides}
 				activeSlide={activeSlide}
@@ -25,7 +28,8 @@ export const DesktopSlider = ({ children }: SliderProps) => {
 
 			<div
 				className="flex flex-col transition-transform duration-700 ease-in-out h-full"
-				style={{ transform: `translateY(-${activeSlide * 100}%)` }}>
+				style={{ transform: `translateY(-${activeSlide * 100}%)` }}
+				aria-live="polite">
 				{children}
 			</div>
 		</div>

@@ -25,6 +25,9 @@ export const ThemeToggle = () => {
 				size="icon"
 				className="border border-blue/30 hover:bg-primary/10 text-foreground relative group w-9 h-9 p-0 button-hover">
 				<span className="sr-only">Toggle theme</span>
+				<div aria-hidden="true" className="flex items-center justify-center">
+					{theme === "dark" ? <Sun /> : <Moon />}
+				</div>
 			</Button>
 		);
 	}

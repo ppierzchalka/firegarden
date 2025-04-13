@@ -43,19 +43,26 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 		<AccordionContext.Provider
 			value={{ selectedItem, setSelectedItem: handleSetSelectedItem }}>
 			<div
-				className={`font-code text-foreground/90 terminal-container ${className}`}>
-				<div className="text-xs text-primary mb-4">
+				className={`font-code text-foreground/90 terminal-container ${className}`}
+				role="region"
+				aria-label="Interests accordion">
+				<div className="text-xs text-primary mb-4" aria-hidden="true">
 					<span>$ browse accordion.dat</span>
 				</div>
 
 				<div className="terminal-text">
 					<div className="border border-blue/20 mb-4">
 						<div className="bg-primary/10 border-b border-blue/20 px-2 py-1 text-sm">
-							<span className="text-primary mr-1">$</span> Accordion Content
+							<span className="text-primary mr-1" aria-hidden="true">
+								$
+							</span>{" "}
+							Accordion Content
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-4">
-							<div className="border-r border-blue/20 p-2">
+							<nav
+								className="border-r border-blue/20 p-2"
+								aria-label="Interests navigation">
 								{Children.map(children, (child) => {
 									if (!isValidElement(child)) return null;
 
@@ -66,9 +73,12 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 									};
 									return cloneElement(child, titleProps);
 								})}
-							</div>
+							</nav>
 
-							<div className="p-3 col-span-3 min-h-[150px]">
+							<div
+								className="p-3 col-span-3 min-h-[150px]"
+								role="tabpanel"
+								aria-live="polite">
 								{Children.map(children, (child) => {
 									if (!isValidElement(child)) return null;
 

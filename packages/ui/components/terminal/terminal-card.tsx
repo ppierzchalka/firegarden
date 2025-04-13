@@ -14,20 +14,25 @@ export function TerminalCard({
 	command,
 	children,
 	className,
-}: TerminalCardProps) {
+	...props
+}: TerminalCardProps & React.HTMLAttributes<HTMLDivElement>) {
 	return (
 		<div
 			className={cn(
 				"font-code text-foreground/90 terminal-container",
 				className
-			)}>
-			<div className="text-xs text-primary mb-4 md:mb-2">
+			)}
+			role="region"
+			{...props}>
+			<div className="text-xs text-primary mb-4 md:mb-2" aria-hidden="true">
 				<span>{command}</span>
 			</div>
 
 			<div className="terminal-text">{children}</div>
 
-			<div className="mt-4 md:mt-2 text-xs text-muted-foreground flex items-center">
+			<div
+				className="mt-4 md:mt-2 text-xs text-muted-foreground flex items-center"
+				aria-hidden="true">
 				<span className="text-primary mr-2">$</span>
 				<span className="inline-block w-2 h-4 bg-primary animate-blink"></span>
 			</div>

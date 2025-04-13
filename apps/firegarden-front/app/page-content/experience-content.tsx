@@ -1,8 +1,10 @@
 import { ExperienceItem, TerminalCard } from "@firegarden/ui";
 
 export const ExperienceContent = () => (
-	<TerminalCard command="$ cat experience.log">
-		<div className="space-y-6">
+	<TerminalCard
+		command="$ cat experience.log"
+		aria-label="Work experience history">
+		<div className="space-y-6" role="list" aria-label="Employment history">
 			<ExperienceItem
 				title="Lead Frontend Developer / Senior Frontend Developer"
 				meta="Vistex • Feb 2024 – Present"

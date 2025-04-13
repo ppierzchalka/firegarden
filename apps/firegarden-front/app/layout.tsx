@@ -14,7 +14,11 @@ export default function RootLayout({
 	children: ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className="scroll-smooth">
+			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="theme-color" content="#000000" />
+			</head>
 			<body suppressHydrationWarning>
 				<HydrationSuppressor>
 					<FiregardenProvider>{children}</FiregardenProvider>

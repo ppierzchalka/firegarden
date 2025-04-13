@@ -34,17 +34,24 @@ export function HeroText({ title, content, className, style }: HeroTextProps) {
 				"md:max-w-xl lg:max-w-2xl mx-auto mb-6 text-muted-foreground md:text-lg font-code relative bg-background/30 border border-primary/10 p-3",
 				className
 			)}
-			style={style}>
+			style={style}
+			role="region"
+			aria-label={`${title} description`}>
 			<div className="flex items-center text-xs text-primary mb-1 border-b border-primary/10 pb-1">
-				<span className="mr-1">+---[ {title} ]---+</span>
+				<span className="mr-1" aria-hidden="true">
+					+---[ {title} ]---+
+				</span>
 			</div>
 			<p className="text-left">
-				<span className="text-primary">$ </span>
+				<span className="text-primary" aria-hidden="true">
+					${" "}
+				</span>
 				{isBelowMd ? content : typedText}
 				<span
 					className={`inline-block w-2 h-4 bg-primary ml-1 ${
 						typedText.length === content.length ? "animate-blink" : "opacity-0"
-					}`}></span>
+					}`}
+					aria-hidden="true"></span>
 			</p>
 		</div>
 	);

@@ -23,8 +23,12 @@ export const HeaderRight = () => {
 
 	return (
 		<>
-			<span className="text-primary mr-1">$</span> location: łódź | timezone:{" "}
-			{timezone}
+			<span className="text-primary mr-1" aria-hidden="true">
+				$
+			</span>
+			<span aria-label="Location: Łódź, Timezone: Central European">
+				location: łódź | timezone: {timezone}
+			</span>
 		</>
 	);
 };

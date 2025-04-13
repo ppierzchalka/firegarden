@@ -4,26 +4,30 @@ import { HeroText, IconButton } from "@firegarden/ui";
 export function HeroContent() {
 	return (
 		<>
-			<div
+			<nav
 				className="flex items-center justify-center mb-8 space-x-4 animate-crt-on"
-				style={{ animationDelay: "900ms" }}>
+				style={{ animationDelay: "900ms" }}
+				aria-label="Social links">
 				<IconButton
-					href="https://github.com"
+					href="https://github.com/ppierzchalka"
 					icon={<Github />}
-					label="GitHub"
+					label="GitHub Profile"
+					ariaProps={{ "aria-label": "Visit my GitHub profile" }}
 				/>
 				<IconButton
-					href="https://linkedin.com"
+					href="https://www.linkedin.com/in/przemyslaw-pierzchalka/"
 					icon={<Linkedin />}
-					label="LinkedIn"
+					label="LinkedIn Profile"
+					ariaProps={{ "aria-label": "Visit my LinkedIn profile" }}
 				/>
 				<IconButton
-					href="mailto:przemek@example.com"
+					href="mailto:przemyslawpierzchalka@gmail.com"
 					icon={<Mail />}
-					label="Email"
+					label="Email me"
 					external={false}
+					ariaProps={{ "aria-label": "Send me an email" }}
 				/>
-			</div>
+			</nav>
 
 			<HeroText
 				title="bio.txt"

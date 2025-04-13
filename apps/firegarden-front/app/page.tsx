@@ -13,10 +13,23 @@ import {
 
 export default function Home() {
 	return (
-		<div className="flex flex-col md:h-screen bg-background font-code relative overflow-hidden transition-colors duration-300">
+		<div
+			className="flex flex-col md:h-screen bg-background font-code relative overflow-hidden transition-colors duration-300"
+			role="document">
+			{/* Skip to main content link for keyboard users */}
+			<a
+				href="#main-content"
+				className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+				Skip to main content
+			</a>
+
 			<Header logo={<HeaderLogo />} right={<HeaderRight />} />
-			<main className="flex-1 relative overflow-hidden crt-effect">
-				<Slider>
+			<main
+				className="flex-1 relative overflow-hidden crt-effect"
+				id="main-content"
+				tabIndex={-1}
+				aria-labelledby="hero-heading">
+				<Slider aria-label="Main content sections" aria-orientation="vertical">
 					<Hero id="hero" image={heroImage} title={"Przemysław Pierzchałka"}>
 						<HeroContent />
 					</Hero>
@@ -32,7 +45,11 @@ export default function Home() {
 				</Slider>
 			</main>
 			<Footer left={<FooterLeft />} right={<FooterRight />}>
-				Made with ❤️ by Przemek
+				Made with{" "}
+				<span aria-label="love" className="px-2">
+					❤️
+				</span>{" "}
+				by Przemek
 			</Footer>
 		</div>
 	);
