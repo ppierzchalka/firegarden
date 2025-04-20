@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "@firegarden/tailwind-config/styles";
-import { FiregardenProvider, HydrationSuppressor } from "@firegarden/ui";
-import { geistMono, geistSans } from "./fonts";
+import { HydrationSuppressor } from "@firegarden/ui";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
@@ -15,11 +14,9 @@ export default function RootLayout({
 	children: ReactNode;
 }>) {
 	return (
-		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+		<html lang="en">
 			<body suppressHydrationWarning>
-				<HydrationSuppressor>
-					<FiregardenProvider>{children}</FiregardenProvider>
-				</HydrationSuppressor>
+				<HydrationSuppressor>{children}</HydrationSuppressor>
 			</body>
 		</html>
 	);
