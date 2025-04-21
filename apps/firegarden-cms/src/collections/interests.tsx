@@ -1,15 +1,10 @@
 import { buildCollection, buildProperty } from "firecms";
-
-export type Interest = {
-	label: string;
-	icon?: string;
-	description?: string;
-};
+import { Interest, INTERESTS_COLLECTION } from "@firegarden/collections-types";
 
 export const interestsCollection = buildCollection<Interest>({
 	name: "Interests",
 	singularName: "Interest",
-	path: "interests",
+	path: INTERESTS_COLLECTION,
 	icon: "EmojiEvents",
 	group: "Website",
 	properties: {

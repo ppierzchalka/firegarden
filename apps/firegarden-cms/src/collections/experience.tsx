@@ -1,18 +1,13 @@
 import { buildCollection, buildProperty } from "firecms";
-
-// Type definition for Experience
-export type Experience = {
-	title: string;
-	company: string;
-	from: Date;
-	to?: Date;
-	description: string;
-};
+import {
+	Experience,
+	EXPERIENCE_COLLECTION,
+} from "@firegarden/collections-types";
 
 export const experienceCollection = buildCollection<Experience>({
 	name: "Experience",
 	singularName: "Experience Entry",
-	path: "experience",
+	path: EXPERIENCE_COLLECTION,
 	icon: "Work",
 	group: "Website",
 	properties: {
@@ -33,15 +28,15 @@ export const experienceCollection = buildCollection<Experience>({
 		}),
 		to: buildProperty({
 			name: "To",
-			description: "Leave blank if current",
+			validation: { required: false },
 			dataType: "date",
+			description: "Leave empty if this is your current position",
 		}),
 		description: buildProperty({
 			name: "Description",
 			validation: { required: true },
 			dataType: "string",
 			markdown: true,
-			multiline: true,
 		}),
 	},
 });

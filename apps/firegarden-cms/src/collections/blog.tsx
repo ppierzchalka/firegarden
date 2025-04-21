@@ -1,19 +1,10 @@
+import { BlogPost, BLOG_COLLECTION } from "@firegarden/collections-types";
 import { buildCollection, buildProperty } from "firecms";
-
-// Type definition for BlogPost
-export type BlogPost = {
-	title: string;
-	slug: string;
-	content: string;
-	created_at: Date;
-	tags?: string[];
-	related_posts?: string[];
-};
 
 export const blogCollection = buildCollection<BlogPost>({
 	name: "Digital Garden",
 	singularName: "Blog Post",
-	path: "blog",
+	path: BLOG_COLLECTION,
 	icon: "Book",
 	group: "Content",
 	properties: {
@@ -39,7 +30,7 @@ export const blogCollection = buildCollection<BlogPost>({
 			dataType: "array",
 			of: {
 				dataType: "reference",
-				path: "blog",
+				path: BLOG_COLLECTION,
 			},
 			description: "Select other blog posts that are related to this one",
 		}),

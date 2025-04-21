@@ -1,24 +1,13 @@
 import { buildCollection, buildProperty } from "firecms";
-
-export type SiteConfig = {
-	name: string;
-	location: string;
-	timezone: string;
-	hero_buttons: Array<{
-		label: string;
-		icon: string;
-		url: string;
-	}>;
-	below_buttons_text: string;
-	about_me: string;
-	tech_stack: string;
-	footer_text: string;
-};
+import {
+	SiteConfig,
+	SITE_CONFIG_COLLECTION,
+} from "@firegarden/collections-types";
 
 export const siteConfigCollection = buildCollection<SiteConfig>({
 	name: "Site Configuration",
 	singularName: "Configuration",
-	path: "site_config",
+	path: SITE_CONFIG_COLLECTION,
 	icon: "Settings",
 	group: "Website",
 	properties: {

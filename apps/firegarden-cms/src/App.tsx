@@ -11,14 +11,12 @@ import "@fontsource/ibm-plex-mono";
 import { firebaseConfig } from "./firebase-config.ts";
 import { websiteCollections } from "./collections/collections-config.ts";
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Cache for authorized emails to reduce Firestore reads
 let cachedAuthorizedEmails: string[] | null = null;
 let cacheTimestamp = 0;
-const CACHE_VALIDITY = 5 * 60 * 1000; // 5 minutes
+const CACHE_VALIDITY = 5 * 60 * 1000;
 
 export default function App() {
 	const myAuthenticator: Authenticator<FirebaseUser> = useCallback(
@@ -31,7 +29,6 @@ export default function App() {
 				let authorizedEmails: string[] = [];
 				const currentTime = Date.now();
 
-				// Use cached emails if available and cache is still valid
 				if (
 					cachedAuthorizedEmails &&
 					currentTime - cacheTimestamp < CACHE_VALIDITY
@@ -39,7 +36,6 @@ export default function App() {
 					authorizedEmails = cachedAuthorizedEmails;
 					console.log("Using cached admin list");
 				} else {
-					// Fetch fresh data from Firestore
 					const adminDocRef = doc(db, "admin", "cms_access");
 					const adminDoc = await getDoc(adminDocRef);
 
@@ -51,7 +47,6 @@ export default function App() {
 					const adminData = adminDoc.data();
 					authorizedEmails = adminData.authorizedEmails || [];
 
-					// Update cache
 					cachedAuthorizedEmails = authorizedEmails;
 					cacheTimestamp = currentTime;
 					console.log("Refreshed admin list from Firestore");
@@ -64,7 +59,6 @@ export default function App() {
 					);
 				}
 
-				// Define roles - you can have different roles for different users if needed
 				const userRoles = ["admin"];
 				authController.setExtra(userRoles);
 
