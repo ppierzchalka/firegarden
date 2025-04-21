@@ -9,7 +9,7 @@ import "typeface-rubik";
 import "@fontsource/ibm-plex-mono";
 
 import { firebaseConfig } from "./firebase-config.ts";
-import { websiteCollections } from "./collections/index.tsx";
+import { websiteCollections } from "./collections/collections-config.ts";
 
 export default function App() {
 	const myAuthenticator: Authenticator<FirebaseUser> = useCallback(
