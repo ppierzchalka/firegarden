@@ -1,7 +1,5 @@
 import { buildCollection } from "firecms";
-import { localeCollection } from "./locales.tsx";
 
-// Type definitions for FireCMS v2
 export type SiteConfig = {
 	name: string;
 	location: string;
@@ -38,14 +36,12 @@ export type BlogPost = {
 	tags?: string[];
 };
 
-// Site Configuration Collection
 export const siteConfigCollection = buildCollection<SiteConfig>({
 	name: "Site Configuration",
 	singularName: "Configuration",
 	path: "site_config",
 	icon: "Settings",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
 		name: {
 			name: "Name",
@@ -108,14 +104,12 @@ export const siteConfigCollection = buildCollection<SiteConfig>({
 	},
 });
 
-// Experience Collection
 export const experienceCollection = buildCollection<Experience>({
 	name: "Experience",
 	singularName: "Experience Entry",
 	path: "experience",
 	icon: "Work",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
 		title: {
 			name: "Title",
@@ -147,14 +141,12 @@ export const experienceCollection = buildCollection<Experience>({
 	},
 });
 
-// Interests Collection
 export const interestsCollection = buildCollection<Interest>({
 	name: "Interests",
 	singularName: "Interest",
 	path: "interests",
 	icon: "EmojiEvents",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
 		label: {
 			name: "Label",
@@ -176,14 +168,12 @@ export const interestsCollection = buildCollection<Interest>({
 	},
 });
 
-// Digital Garden Collection
 export const blogCollection = buildCollection<BlogPost>({
 	name: "Digital Garden",
 	singularName: "Blog Post",
 	path: "blog",
 	icon: "Book",
 	group: "Content",
-	subcollections: [localeCollection],
 	properties: {
 		title: {
 			name: "Title",
@@ -219,7 +209,6 @@ export const blogCollection = buildCollection<BlogPost>({
 	},
 });
 
-// Export all collections for use in the app
 export const websiteCollections = [
 	siteConfigCollection,
 	experienceCollection,

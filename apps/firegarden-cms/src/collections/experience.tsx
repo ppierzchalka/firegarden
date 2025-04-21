@@ -1,5 +1,4 @@
-import { buildCollection } from "firecms";
-import { localeCollection } from "./locales.tsx";
+import { buildCollection, buildProperty } from "firecms";
 
 // Type definition for Experience
 export type Experience = {
@@ -10,41 +9,39 @@ export type Experience = {
 	description: string;
 };
 
-// Experience Collection
 export const experienceCollection = buildCollection<Experience>({
 	name: "Experience",
 	singularName: "Experience Entry",
 	path: "experience",
 	icon: "Work",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
-		title: {
+		title: buildProperty({
 			name: "Title",
 			validation: { required: true },
 			dataType: "string",
-		},
-		company: {
+		}),
+		company: buildProperty({
 			name: "Company",
 			validation: { required: true },
 			dataType: "string",
-		},
-		from: {
+		}),
+		from: buildProperty({
 			name: "From",
 			validation: { required: true },
 			dataType: "date",
-		},
-		to: {
+		}),
+		to: buildProperty({
 			name: "To",
 			description: "Leave blank if current",
 			dataType: "date",
-		},
-		description: {
+		}),
+		description: buildProperty({
 			name: "Description",
 			validation: { required: true },
 			dataType: "string",
 			markdown: true,
 			multiline: true,
-		},
+		}),
 	},
 });

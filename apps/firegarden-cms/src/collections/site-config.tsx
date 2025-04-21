@@ -1,87 +1,96 @@
-import { buildCollection } from "firecms";
-import { localeCollection } from "./locales.tsx";
+import { buildCollection, buildProperty } from "firecms";
 
-// Type definition for SiteConfig
 export type SiteConfig = {
 	name: string;
 	location: string;
 	timezone: string;
-	hero_text: string;
-	buttons: Array<{
+	hero_buttons: Array<{
 		label: string;
 		icon: string;
 		url: string;
 	}>;
 	below_buttons_text: string;
-	photo_url: string;
+	about_me: string;
+	tech_stack: string;
+	footer_text: string;
 };
 
-// Site Configuration Collection
 export const siteConfigCollection = buildCollection<SiteConfig>({
 	name: "Site Configuration",
 	singularName: "Configuration",
 	path: "site_config",
 	icon: "Settings",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
-		name: {
+		name: buildProperty({
 			name: "Name",
 			validation: { required: true },
 			dataType: "string",
-		},
-		location: {
+			description: "Your full name as displayed on the website",
+		}),
+		location: buildProperty({
 			name: "Location",
 			validation: { required: true },
 			dataType: "string",
-		},
-		timezone: {
+			description: "Your current location (e.g., 'Warsaw, Poland')",
+		}),
+		timezone: buildProperty({
 			name: "Timezone",
 			validation: { required: true },
 			dataType: "string",
 			description: "e.g. 'Europe/Warsaw'",
-		},
-		hero_text: {
-			name: "Hero Text",
-			validation: { required: true },
-			dataType: "string",
-			markdown: true,
-		},
-		buttons: {
-			name: "Buttons",
-			description: "Use Lucide icon names",
+		}),
+		hero_buttons: buildProperty({
+			name: "Hero Buttons",
+			description:
+				"Navigation buttons for your profile (GitHub, LinkedIn, etc.)",
 			dataType: "array",
 			of: {
 				dataType: "map",
 				properties: {
-					label: {
+					label: buildProperty({
 						name: "Label",
 						dataType: "string",
-					},
-					icon: {
+						description: "Button text (e.g., 'GitHub')",
+					}),
+					icon: buildProperty({
 						name: "Icon",
 						dataType: "string",
-					},
-					url: {
+						description: "Lucide icon name (e.g., 'github')",
+					}),
+					url: buildProperty({
 						name: "URL",
 						dataType: "string",
-					},
+						url: true,
+						description:
+							"Link destination (e.g., 'https://github.com/yourusername')",
+					}),
 				},
 			},
-		},
-		below_buttons_text: {
-			name: "Text Below Buttons",
+		}),
+		below_buttons_text: buildProperty({
+			name: "Short Bio",
 			dataType: "string",
 			markdown: true,
-		},
-		photo_url: {
-			name: "Profile Photo URL",
+			description: "Brief bio displayed below the hero buttons",
+		}),
+		about_me: buildProperty({
+			name: "About Me",
 			dataType: "string",
-			url: true,
-			storage: {
-				storagePath: "profile_images",
-				acceptedFiles: ["image/*"],
-			},
-		},
+			markdown: true,
+			description: "Detailed description about yourself",
+		}),
+		tech_stack: buildProperty({
+			name: "Tech Stack",
+			dataType: "string",
+			markdown: true,
+			description: "List of technologies you work with",
+		}),
+		footer_text: buildProperty({
+			name: "Footer Text",
+			dataType: "string",
+			markdown: true,
+			description: "Text displayed in the website footer",
+		}),
 	},
 });

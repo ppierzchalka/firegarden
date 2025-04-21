@@ -1,38 +1,34 @@
-import { buildCollection } from "firecms";
-import { localeCollection } from "./locales.tsx";
+import { buildCollection, buildProperty } from "firecms";
 
-// Type definition for Interest
 export type Interest = {
 	label: string;
 	icon?: string;
 	description?: string;
 };
 
-// Interests Collection
 export const interestsCollection = buildCollection<Interest>({
 	name: "Interests",
 	singularName: "Interest",
 	path: "interests",
 	icon: "EmojiEvents",
 	group: "Website",
-	subcollections: [localeCollection],
 	properties: {
-		label: {
+		label: buildProperty({
 			name: "Label",
 			validation: { required: true },
 			dataType: "string",
-		},
-		icon: {
+		}),
+		icon: buildProperty({
 			name: "Icon (optional)",
 			dataType: "string",
 			validation: { required: false },
-		},
-		description: {
+		}),
+		description: buildProperty({
 			name: "Description",
 			dataType: "string",
 			markdown: true,
 			multiline: true,
 			validation: { required: false },
-		},
+		}),
 	},
 });

@@ -1,5 +1,4 @@
-import { buildCollection } from "firecms";
-import { localeCollection } from "./locales.tsx";
+import { buildCollection, buildProperty } from "firecms";
 
 // Type definition for BlogPost
 export type BlogPost = {
@@ -8,47 +7,60 @@ export type BlogPost = {
 	content: string;
 	created_at: Date;
 	tags?: string[];
+	related_posts?: string[];
 };
 
-// Digital Garden Collection
 export const blogCollection = buildCollection<BlogPost>({
 	name: "Digital Garden",
 	singularName: "Blog Post",
 	path: "blog",
 	icon: "Book",
 	group: "Content",
-	subcollections: [localeCollection],
 	properties: {
-		title: {
+		title: buildProperty({
 			name: "Title",
 			validation: { required: true },
 			dataType: "string",
-		},
-		slug: {
+		}),
+		slug: buildProperty({
 			name: "Slug",
 			validation: { required: true },
 			dataType: "string",
 			description: "e.g. 'my-first-post'",
-		},
-		content: {
+		}),
+		content: buildProperty({
 			name: "Content",
 			validation: { required: true },
 			dataType: "string",
 			markdown: true,
-			multiline: true,
-		},
-		created_at: {
+		}),
+		related_posts: buildProperty({
+			name: "Related Posts",
+			dataType: "array",
+			of: {
+				dataType: "reference",
+				path: "blog",
+			},
+			description: "Select other blog posts that are related to this one",
+		}),
+		created_at: buildProperty({
 			name: "Created At",
 			validation: { required: true },
 			dataType: "date",
-		},
-		tags: {
+			disabled: {
+				hidden: false, // Make it visible but not editable
+				clearable: false, // Prevent clearing the field
+			},
+			defaultValue: new Date(), // Set default value to current date
+			description: "Automatically set to the current date when created",
+		}),
+		tags: buildProperty({
 			name: "Tags",
 			dataType: "array",
 			of: {
 				dataType: "string",
 			},
 			validation: { required: false },
-		},
+		}),
 	},
 });
