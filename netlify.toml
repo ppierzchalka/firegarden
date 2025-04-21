@@ -12,10 +12,12 @@
       echo "Building CMS app..."
       APP_DIR="apps/firegarden-cms"
       APP_NAME="firegarden-cms"
+      BUILD_DIR="dist"
     else
       echo "Building Frontend app..."
       APP_DIR="apps/firegarden-front"
       APP_NAME="firegarden-front"
+      BUILD_DIR=".next"
     fi
     
     # Build the selected app using package name, not directory
@@ -23,12 +25,24 @@
     
     # Prepare deployment directory
     mkdir -p netlify-deploy
-    # Verify that .next directory exists before copying
-    if [ -d "$APP_DIR/.next" ]; then
-      cp -R $APP_DIR/.next/* netlify-deploy/
+    
+    # Check which app is being built and copy appropriate build directory
+    if [ "$SITE_APP" = "cms" ]; then
+      # For Vite app, copy from dist directory
+      if [ -d "$APP_DIR/$BUILD_DIR" ]; then
+        cp -R $APP_DIR/$BUILD_DIR/* netlify-deploy/
+      else
+        echo "Error: Build output directory $APP_DIR/$BUILD_DIR not found"
+        exit 1
+      fi
     else
-      echo "Error: Build output directory $APP_DIR/.next not found"
-      exit 1
+      # For Next.js app, copy from .next directory
+      if [ -d "$APP_DIR/$BUILD_DIR" ]; then
+        cp -R $APP_DIR/$BUILD_DIR/* netlify-deploy/
+      else
+        echo "Error: Build output directory $APP_DIR/$BUILD_DIR not found"
+        exit 1
+      fi
     fi
     
     # Verify that public directory exists before copying
@@ -46,7 +60,10 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--version" # Prevents Netlify npm install
-  NEXT_DISABLE_NETLIFY_PLATFORM = "true" # For better Next.js Image compatibility
+
+# Next.js specific configuration for the frontend app
+[context.production.environment]
+  NEXT_DISABLE_NETLIFY_PLATFORM = "true" # Only needed for Next.js frontend
 
 # Production branch configuration - empty on purpose as we're using environment variables
 [context.production]

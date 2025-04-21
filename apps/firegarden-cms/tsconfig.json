@@ -1,18 +1,14 @@
 {
-	"extends": "@firegarden/typescript-config/nextjs.json",
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "@firegarden/typescript-config/base.json",
 	"compilerOptions": {
-		"plugins": [
-			{
-				"name": "next"
-			}
-		]
+		"jsx": "react-jsx",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"noEmit": true
 	},
-	"include": [
-		"next-env.d.ts",
-		"next.config.mjs",
-		"**/*.ts",
-		"**/*.tsx",
-		".next/types/**/*.ts"
-	],
-	"exclude": ["node_modules"]
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }
