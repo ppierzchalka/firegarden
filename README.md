@@ -171,32 +171,59 @@ For security best practices when using this template:
 
 ## Deployment to Netlify
 
-This project is configured for deployment to Netlify using the `netlify.toml` file in the root directory.
-
-### Deployment Configuration
-
-The deployment process:
-
-1. Uses Turborepo to build the selected application
-2. Supports both Next.js (frontend) and Vite (CMS) build outputs
-3. Deploys the appropriate files based on the `SITE_APP` environment variable
+This project is configured for deployment to Netlify using the `netlify.toml` file in the root directory. You'll need to create two separate Netlify sites - one for the frontend and one for the CMS.
 
 ### Setting Up Netlify Deployment
 
-1. Connect your GitHub repository to Netlify
-2. Configure environment variables in Netlify settings:
-   - For the frontend site, no `SITE_APP` variable is needed
-   - For the CMS site, set `SITE_APP=cms`
-3. Add your Firebase environment variables to Netlify settings
-4. Deploy from the main branch
+1. **Create two Netlify sites**:
+
+   - Sign in to your Netlify account
+   - Click "Add new site" → "Import an existing project"
+   - Connect to your GitHub repository
+   - Create two separate sites using the same repository
+
+2. **Configure each site**:
+
+   **For the Frontend site**:
+
+   - Netlify will automatically detect the build settings from the netlify.toml file
+   - Select Next.js as the runtime in site settings
+   - Base directory: `/` (root of the monorepo)
+   - No need to set build command or publish directory (handled by netlify.toml)
+   - No `SITE_APP` environment variable needed (defaults to frontend)
+
+   **For the CMS site**:
+
+   - Netlify will automatically detect the build settings from the netlify.toml file
+   - Base directory: `/` (root of the monorepo)
+   - No need to set build command or publish directory (handled by netlify.toml)
+   - Add environment variable: `SITE_APP=cms`
+
+3. **Add Environment Variables**:
+   - Go to Site settings → Environment variables
+   - Add all Firebase variables as specified in the Environment Setup section
+   - You can import directly from your .env file or add them manually
+4. **Deploy from the main branch**:
+   - Netlify will automatically detect changes to your main branch and trigger deployments
+   - Each site will build the appropriate application based on the configuration
 
 ### Custom Domains
 
-To use a custom domain:
+To use custom domains for your sites:
 
-1. Configure your domain in Netlify's domain settings
-2. Set up DNS records as instructed by Netlify
-3. Enable HTTPS (Netlify provides free SSL certificates)
+1. Go to Site settings → Domain management
+2. Add your custom domain for each site
+3. Configure DNS records as instructed by Netlify
+4. Enable HTTPS (Netlify provides free SSL certificates)
+
+### Monorepo Detection
+
+Netlify automatically detects that you're using a monorepo structure. The `netlify.toml` file in the root directory contains the logic to:
+
+1. Determine which app to build based on the `SITE_APP` environment variable
+2. Build the correct app using Turborepo
+3. Copy the built files to the deployment directory
+4. This enables you to use a single repository for multiple Netlify sites
 
 ## Development
 
