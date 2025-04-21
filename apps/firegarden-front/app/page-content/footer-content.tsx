@@ -23,7 +23,11 @@ export async function FooterLeft() {
 				$
 			</span>{" "}
 			<span className="text-foreground/70">stack:</span>{" "}
-			<MarkdownRenderer content={siteConfig.tech_stack} />
+			<MarkdownRenderer
+				className="text-foreground/70"
+				inline
+				content={siteConfig.tech_stack}
+			/>
 		</>
 	);
 }
