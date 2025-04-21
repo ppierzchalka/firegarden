@@ -1,10 +1,12 @@
+import { ReactNode } from "react";
+
 export interface ExperienceItemProps {
 	/** The job title */
 	title: string;
 	/** The company and date information */
 	meta: string;
 	/** The job description */
-	description: string;
+	description: ReactNode;
 }
 
 export function ExperienceItem({

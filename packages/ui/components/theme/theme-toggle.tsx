@@ -10,12 +10,10 @@ export const ThemeToggle = () => {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
-	// Ensure component is mounted to avoid hydration mismatch
 	useEffect(() => {
 		setMounted(true);
 	}, []);
 
-	// Toggle theme function
 	const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
 	if (!mounted) {

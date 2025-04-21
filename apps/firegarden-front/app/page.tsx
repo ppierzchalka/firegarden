@@ -1,4 +1,5 @@
 import { Footer, Header, Hero, Slide, Slider } from "@firegarden/ui";
+import { fetchSiteConfig } from "./lib/firebase-utils";
 import {
 	BioContent,
 	ExperienceContent,
@@ -11,7 +12,11 @@ import {
 	InterestsContent,
 } from "./page-content";
 
-export default function Home() {
+export default async function Home() {
+	// Fetch site config for the page title
+	const siteConfig = await fetchSiteConfig();
+	const name = siteConfig?.name || "Przemysław Pierzchałka";
+
 	return (
 		<div
 			className="flex flex-col md:h-screen bg-background font-code relative overflow-hidden transition-colors duration-300"
@@ -30,7 +35,7 @@ export default function Home() {
 				tabIndex={-1}
 				aria-labelledby="hero-heading">
 				<Slider aria-label="Main content sections" aria-orientation="vertical">
-					<Hero id="hero" image={heroImage} title={"Przemysław Pierzchałka"}>
+					<Hero id="hero" image={heroImage} title={name}>
 						<HeroContent />
 					</Hero>
 					<Slide id="about" title="About Me">
@@ -49,7 +54,6 @@ export default function Home() {
 				<span aria-label="love" className="px-2">
 					❤️
 				</span>{" "}
-				by Przemek
 			</Footer>
 		</div>
 	);

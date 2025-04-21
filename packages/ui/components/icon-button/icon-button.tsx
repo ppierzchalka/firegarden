@@ -43,13 +43,11 @@ export function IconButton({
 	onClick,
 	ariaProps,
 }: IconButtonProps) {
-	// Handle the icon styling consistently
 	const styledIcon = cloneElement(icon, {
 		className:
 			"w-5 h-5 text-primary group-hover:text-foreground transition-colors duration-300",
 	});
 
-	// Common button props
 	const buttonProps = {
 		variant: "outline" as const,
 		size: "icon" as const,
@@ -60,7 +58,6 @@ export function IconButton({
 		...ariaProps,
 	};
 
-	// If we have an onClick, it's a button, otherwise it's a link
 	if (onClick) {
 		return (
 			<Button {...buttonProps} onClick={onClick}>
@@ -70,7 +67,6 @@ export function IconButton({
 		);
 	}
 
-	// Otherwise it's a link
 	return (
 		<Button {...buttonProps} asChild>
 			<a

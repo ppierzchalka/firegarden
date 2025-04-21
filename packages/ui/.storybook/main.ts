@@ -33,21 +33,17 @@ const config: StorybookConfig = {
 	},
 
 	webpackFinal: async (config) => {
-		// Find CSS rule
 		const cssRule = (config.module as any).rules.find(
 			(rule) => rule.test && rule.test.toString().includes(".css")
 		);
 
-		// If CSS rule exists, add PostCSS loader for Tailwind
 		if (cssRule && cssRule.use) {
-			// Add our PostCSS config
 			const postCssLoader = {
 				loader: "postcss-loader",
 				options: {
 					postcssOptions,
 				},
 			};
-			// Add the loader to the rule
 			if (Array.isArray(cssRule.use)) {
 				cssRule.use.push(postCssLoader);
 			}

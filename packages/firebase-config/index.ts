@@ -3,8 +3,6 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
-// Initialize Firebase with environment variables
-// Each app will provide its own environment variables
 const getFirebaseConfig = () => {
 	const firebaseConfig = {
 		apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -18,7 +16,6 @@ const getFirebaseConfig = () => {
 	return firebaseConfig;
 };
 
-// Initialize Firebase app
 export const initFirebase = () => {
 	const config = getFirebaseConfig();
 	const app = initializeApp(config);
@@ -29,5 +26,4 @@ export const initFirebase = () => {
 	return { app, db, auth, storage };
 };
 
-// Export types
 export type FirebaseServices = ReturnType<typeof initFirebase>;

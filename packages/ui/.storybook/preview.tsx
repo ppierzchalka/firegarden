@@ -1,5 +1,4 @@
 import type { Preview } from "@storybook/react";
-// import "./storybook.css";
 import "../../tailwind-config/globals.css";
 import React from "react";
 import { FiregardenProvider } from "../components/firegarden-provider";
@@ -23,7 +22,6 @@ const preview: Preview = {
 		backgrounds: { disable: true },
 	},
 	decorators: [
-		// Apply the theme class to the html element
 		withThemeByClassName({
 			themes: {
 				light: "light",

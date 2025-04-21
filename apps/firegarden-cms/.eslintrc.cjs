@@ -4,10 +4,9 @@ module.exports = {
 	extends: ["@firegarden/eslint-config/react.js"],
 	overrides: [
 		{
-			// Exclude configuration files from TypeScript-based linting
 			files: ["*.cjs", "vite.config.ts"],
 			parserOptions: {
-				project: null, // Disable TypeScript parsing for these files
+				project: null,
 			},
 			rules: {
 				"@typescript-eslint/no-var-requires": "off",
@@ -15,6 +14,6 @@ module.exports = {
 		},
 	],
 	env: {
-		node: true, // This allows 'module' to be recognized
+		node: true,
 	},
 };

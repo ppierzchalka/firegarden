@@ -1,0 +1,13 @@
+{
+	"name": "@firegarden/collections-types",
+	"version": "0.0.0",
+	"main": "./index.ts",
+	"types": "./index.ts",
+	"dependencies": {
+		"@firegarden/firebase-config": "workspace:*"
+	},
+	"devDependencies": {
+		"typescript": "^5.0.4",
+		"@firegarden/typescript-config": "workspace:*"
+	}
+}
