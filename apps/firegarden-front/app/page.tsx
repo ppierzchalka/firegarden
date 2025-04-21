@@ -54,6 +54,7 @@ export default async function Home() {
 				<span aria-label="love" className="px-2">
 					❤️
 				</span>{" "}
+				by Przemek
 			</Footer>
 		</div>
 	);

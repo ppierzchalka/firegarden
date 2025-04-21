@@ -17,37 +17,34 @@ import {
 	INTERESTS_COLLECTION,
 } from "@firegarden/collections-types";
 
-const converter = <T extends DocumentData>(
-	doc: QueryDocumentSnapshot<DocumentData>
-): T => {
+/**
+ * Converts a Firestore document to the specified type
+ * Adds the document ID and converts any Firestore timestamps to JavaScript Date objects
+ */
+function converter<T>(doc: QueryDocumentSnapshot<DocumentData>): T {
 	const data = doc.data();
 
+	// Process any Firestore Timestamps into JavaScript Date objects
 	Object.keys(data).forEach((key) => {
 		if (data[key]?.toDate instanceof Function) {
 			data[key] = data[key].toDate();
 		}
 	});
 
+	// Return with document ID added
 	return {
 		id: doc.id,
 		...data,
 	} as T;
-};
+}
 
 export async function fetchSiteConfig(): Promise<SiteConfig | null> {
 	try {
-		const q = query(
-			collection(db, SITE_CONFIG_COLLECTION),
-			orderBy("created_at", "desc"),
-			limit(1)
-		);
-
+		// Get the site config without ordering by created_at since it might not exist
+		const q = query(collection(db, SITE_CONFIG_COLLECTION), limit(1));
 		const snapshot = await getDocs(q);
 
-		console.log("Site config snapshot:", snapshot.docs[0]);
-
-		if (snapshot.empty) {
-			console.warn("No site configuration found");
+		if (snapshot.empty || !snapshot.docs[0]) {
 			return null;
 		}
 
@@ -67,10 +64,7 @@ export async function fetchExperiences(): Promise<Experience[]> {
 
 		const snapshot = await getDocs(q);
 
-		console.log("Experience snapshot:", snapshot);
-
 		if (snapshot.empty) {
-			console.warn("No experience entries found");
 			return [];
 		}
 
@@ -87,10 +81,7 @@ export async function fetchInterests(): Promise<Interest[]> {
 
 		const snapshot = await getDocs(q);
 
-		console.log("Interests snapshot:", snapshot);
-
 		if (snapshot.empty) {
-			console.warn("No interests found");
 			return [];
 		}
 
