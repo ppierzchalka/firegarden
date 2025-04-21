@@ -1,4 +1,7 @@
-# Firegarden
+<div align="center">
+  <img src="apps/firegarden-cms/public/firecms.svg" alt="Firegarden Logo" width="100" height="100">
+  <h1>Firegarden</h1>
+</div>
 
 This repository contains a starter pack for creating your own digital business card/resume with plans to expand into a digital garden. Fork this template, customize it, and deploy it to Netlify with your own custom domain.
 
@@ -9,30 +12,153 @@ This project is structured as follows:
 - **Monorepo Tool**: Turborepo for efficient workspace management
 - **Language**: TypeScript for type safety and better developer experience
 - **Styling**: Tailwind CSS for utility-first styling
-- **Framework**: Next.js for React-based frontend with dynamic rendering
+- **Frontend**: Next.js for React-based frontend with dynamic rendering
+- **CMS**: React app built with Vite for content management
 - **UI Components**: shadcn/ui components with custom designs
-- **Content Management** (Planned):
-  - Firebase for database and image storage (to be implemented)
-  - CMS application for content management (to be implemented)
-  - Next.js frontend with read-only database access
+- **Database**: Firebase for data storage and authentication
+- **Deployment**: Netlify for hosting and continuous deployment
 
 ## Project Structure
 
 The repository is organized as a monorepo with the following applications:
 
-1. **Frontend**: A Next.js application serving as the public-facing website
-2. **CMS**: A content management system (currently in development)
+1. **Frontend (firegarden-front)**: A Next.js application serving as the public-facing website
+2. **CMS (firegarden-cms)**: A React/Vite-based content management system using FireCMS
 
 When built, the applications are deployed to Netlify.
 
 ## Content Architecture
 
-The site currently uses a static content approach, with plans for dynamic content:
+This project uses Firebase for content management:
 
-- Currently using file-based content with plans to implement Firebase in the future
-- Future implementation will include dynamic rendering for content changes without redeployment
-- A dedicated CMS interface for content management is planned
-- Role-based authentication will restrict CMS access to administrators only
+- **Firebase Database**: Stores all content displayed on the frontend
+- **FireCMS**: Provides an intuitive interface for managing content
+- **Role-based Access**: Only authorized administrators can access the CMS
+- **Collections**: Content is organized into structured collections (defined in `firegarden-cms/src/collections/`)
+- **Public Access**: The frontend has read-only access to all content
+- **Admin-only Writes**: Only authorized admins can modify content
+
+## Firebase Setup
+
+### Firebase Configuration
+
+1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/)
+2. Enable Firestore Database and Authentication (with Google or your preferred providers)
+3. Copy your Firebase configuration to the appropriate `.env` files (see Environment Setup below)
+
+### Firestore Security Rules
+
+Configure your Firestore security rules to ensure proper access control:
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Publicly readable whitelist, only editable from Firebase Console
+    match /admin/cms_access {
+      allow read: if true; // public read access
+      allow write: if false; // block all client writes
+    }
+
+    // All other documents
+    match /{document=**} {
+      // Public read
+      allow read: if true;
+
+      // Only allow writes if user is authenticated AND their email is in the admin list
+      allow write: if request.auth != null &&
+                   request.auth.token.email in get(/databases/$(database)/documents/admin/cms_access).data.authorizedEmails;
+    }
+  }
+}
+```
+
+These rules ensure:
+
+- Everyone can read all content (needed for the frontend)
+- Only authorized administrators can write/modify content
+- The admin access list can only be modified through Firebase Console
+
+### Required Admin Document
+
+Create a document in your Firestore database to control CMS access:
+
+1. Collection: `admin`
+2. Document ID: `cms_access`
+3. Field: `authorizedEmails` (array of strings)
+4. Add your admin email addresses to the array
+
+Example:
+
+```
+{
+  "authorizedEmails": ["your.email@example.com", "another.admin@example.com"]
+}
+```
+
+Only users with emails in this list will be able to access the CMS.
+
+## Collections Configuration
+
+All content in Firegarden is structured into collections that define the schema for your content. These collections are defined in the `firegarden-cms/src/collections/` directory.
+
+### Available Collections
+
+The CMS comes with several pre-configured collections:
+
+- **Site Config**: Basic site settings (title, description, etc.)
+- **App**: Application settings and metadata
+- **Blog**: Blog posts and articles
+- **Experience**: Work and educational experience
+- **Interests**: Personal or professional interests
+
+You can modify these collections or add new ones by editing the files in the collections directory. Each collection defines:
+
+- Field types and validation
+- Display options in the CMS
+- Relationships between collections
+
+### Customizing Collections
+
+To customize a collection, edit its corresponding file in `firegarden-cms/src/collections/`. For example, to modify the blog collection, edit `blog.tsx`.
+
+## Environment Setup
+
+Both applications require environment variables for proper configuration. Example files are provided for reference.
+
+### Frontend Environment (.env.local)
+
+Create a `.env.local` file in the `apps/firegarden-front` directory with the following variables:
+
+```
+# Firebase Configuration
+FIREBASE_API_KEY=your-api-key
+FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+FIREBASE_APP_ID=your-app-id
+
+# GitHub Integration (optional)
+GITHUB_USERNAME=your-github-username
+```
+
+### CMS Environment (.env)
+
+Create a `.env` file in the `apps/firegarden-cms` directory with the following variables:
+
+```
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=your-api-key
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+```
+
+Note the different prefixes for environment variables: Next.js uses no prefix for server-side variables, while Vite requires the `VITE_` prefix.
 
 ## Security and Configuration
 
@@ -40,38 +166,100 @@ For security best practices when using this template:
 
 - No sensitive information should be committed directly to the repository
 - Environment variables should be managed through Netlify Environment Variables for production
-- Local development should use a `.env.local` file (not committed to the repository)
-- See [Next.js Environment Variables documentation](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) for implementation details
+- Local development should use appropriate environment files (not committed to the repository)
+- Frontend app's environment variables should be configured in Netlify for the production site
 
-## Planned Features
+## Deployment to Netlify
 
-- Digital business card/resume (Phase 1)
-- Digital garden for notes and thoughts (Phase 2)
-- Portfolio section for projects (Phase 3)
-- CMS for easier content management (Phase 4)
+This project is configured for deployment to Netlify using the `netlify.toml` file in the root directory. You'll need to create two separate Netlify sites - one for the frontend and one for the CMS.
+
+### Setting Up Netlify Deployment
+
+1. **Create two Netlify sites**:
+
+   - Sign in to your Netlify account
+   - Click "Add new site" → "Import an existing project"
+   - Connect to your GitHub repository
+   - Create two separate sites using the same repository
+
+2. **Configure each site**:
+
+   **For the Frontend site**:
+
+   - Netlify will automatically detect the build settings from the netlify.toml file
+   - Select Next.js as the runtime in site settings
+   - Base directory: `/` (root of the monorepo)
+   - No need to set build command or publish directory (handled by netlify.toml)
+   - No `SITE_APP` environment variable needed (defaults to frontend)
+
+   **For the CMS site**:
+
+   - Netlify will automatically detect the build settings from the netlify.toml file
+   - Base directory: `/` (root of the monorepo)
+   - No need to set build command or publish directory (handled by netlify.toml)
+   - Add environment variable: `SITE_APP=cms`
+
+3. **Add Environment Variables**:
+   - Go to Site settings → Environment variables
+   - Add all Firebase variables as specified in the Environment Setup section
+   - You can import directly from your .env file or add them manually
+4. **Deploy from the main branch**:
+   - Netlify will automatically detect changes to your main branch and trigger deployments
+   - Each site will build the appropriate application based on the configuration
+
+### Custom Domains
+
+To use custom domains for your sites:
+
+1. Go to Site settings → Domain management
+2. Add your custom domain for each site
+3. Configure DNS records as instructed by Netlify
+4. Enable HTTPS (Netlify provides free SSL certificates)
+
+### Monorepo Detection
+
+Netlify automatically detects that you're using a monorepo structure. The `netlify.toml` file in the root directory contains the logic to:
+
+1. Determine which app to build based on the `SITE_APP` environment variable
+2. Build the correct app using Turborepo
+3. Copy the built files to the deployment directory
+4. This enables you to use a single repository for multiple Netlify sites
 
 ## Development
 
 ### Prerequisites
 
-- Node.js
+- Node.js 18 or later
 - pnpm (package manager)
+- Firebase account
 - Netlify account for deployment
 
 ### Getting Started
 
 1. Clone the repository
-2. Create a `.env.local` file (see `.env.example` for required variables)
+2. Create environment files as described in the Environment Setup section
 3. Install dependencies: `pnpm install`
-4. Start development server: `pnpm dev`
+4. Start development:
+   - For frontend: `pnpm --filter firegarden-front dev`
+   - For CMS: `pnpm --filter firegarden-cms dev`
+   - For both: `pnpm dev`
 
-### Deployment
+### Customizing the Frontend
 
-The site is deployed to Netlify when changes are pushed to the main branch:
+The frontend application can be customized to match your preferences:
 
-1. Netlify detects changes in the repository
-2. Builds the Next.js application specified by the environment variable
-3. Deploys to your custom domain configured in Netlify
+- Modify the design in `apps/firegarden-front/app`
+- Update components in the UI package (`packages/ui/components`)
+- Add new pages by creating new directories in the `app` folder
+- Customize Tailwind configuration in `packages/tailwind-config`
+
+### Customizing the CMS
+
+The CMS is built using FireCMS and can be customized:
+
+- Modify authentication logic in `apps/firegarden-cms/src/App.tsx`
+- Update collection schemas in `apps/firegarden-cms/src/collections/`
+- Add new features by extending the FireCMS components
 
 ## License
 

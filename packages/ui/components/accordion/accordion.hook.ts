@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 
-// Context to manage the selected accordion item
 type AccordionContextType = {
 	selectedItem: string | null;
 	setSelectedItem: (id: string | null) => void;

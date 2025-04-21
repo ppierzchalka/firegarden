@@ -10,15 +10,15 @@ import {
 import { AccordionContext } from "./accordion.hook";
 import { AccordionItemProps } from "./accordion-item";
 export interface AccordionProps {
-	children: ReactElement<AccordionItemProps>[];
+	children:
+		| ReactElement<AccordionItemProps>[]
+		| ReactElement<AccordionItemProps>;
 	className?: string;
 }
 
 export function Accordion({ children, className = "" }: AccordionProps) {
-	// Find the first item ID or title to use as default selected item
 	let firstItemId: string | null = null;
 
-	// Safely extract the first id or title from children
 	Children.forEach(children, (child) => {
 		if (
 			firstItemId === null &&
@@ -31,12 +31,10 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 
 	const [selectedItem, setSelectedItem] = useState<string | null>(firstItemId);
 
-	// Custom setter that prevents unselecting the last active item
 	const handleSetSelectedItem = (id: string | null) => {
 		if (id !== null) {
 			setSelectedItem(id);
 		}
-		// If trying to unselect (setting to null), do nothing - we always want an item selected
 	};
 
 	return (
@@ -66,7 +64,6 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 								{Children.map(children, (child) => {
 									if (!isValidElement(child)) return null;
 
-									// Pass props directly without typecasting
 									const titleProps = {
 										renderTitle: true,
 										renderContent: false,
@@ -82,7 +79,6 @@ export function Accordion({ children, className = "" }: AccordionProps) {
 								{Children.map(children, (child) => {
 									if (!isValidElement(child)) return null;
 
-									// Pass props directly without typecasting
 									const contentProps = {
 										renderTitle: false,
 										renderContent: true,

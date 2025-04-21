@@ -42,7 +42,7 @@ export function HeroText({ title, content, className, style }: HeroTextProps) {
 					+---[ {title} ]---+
 				</span>
 			</div>
-			<p className="text-left">
+			<div className="text-left">
 				<span className="text-primary" aria-hidden="true">
 					${" "}
 				</span>
@@ -52,7 +52,7 @@ export function HeroText({ title, content, className, style }: HeroTextProps) {
 						typedText.length === content.length ? "animate-blink" : "opacity-0"
 					}`}
 					aria-hidden="true"></span>
-			</p>
+			</div>
 		</div>
 	);
 }

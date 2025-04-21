@@ -37,11 +37,9 @@ export function ThemeProvider({
 	const [theme, setTheme] = useState<Theme>(() => {
 		if (typeof window === "undefined") return defaultTheme;
 
-		// Get stored theme or check user preference if not stored
-		const storedTheme = localStorage.getItem(storageKey) as Theme | null;
+		const storedTheme = localStorage.getItem(storageKey);
 		if (storedTheme === "dark" || storedTheme === "light") return storedTheme;
 
-		// If no valid stored theme, check system preference
 		return window.matchMedia("(prefers-color-scheme: dark)").matches
 			? "dark"
 			: "light";

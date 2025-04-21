@@ -1,10 +1,12 @@
+import { ReactNode } from "react";
+
 export interface ExperienceItemProps {
 	/** The job title */
 	title: string;
 	/** The company and date information */
 	meta: string;
 	/** The job description */
-	description: string;
+	description: ReactNode;
 }
 
 export function ExperienceItem({
@@ -29,7 +31,7 @@ export function ExperienceItem({
 						<span className="sr-only">Company and date: </span>
 						{meta}
 					</div>
-					<p className="md:text-sm">{description}</p>
+					<div className="md:text-sm">{description}</div>
 				</div>
 			</div>
 		</div>
