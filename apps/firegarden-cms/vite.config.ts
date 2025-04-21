@@ -13,6 +13,8 @@ export default defineConfig({
 		alias: {
 			"@": resolve(__dirname, "./src"),
 		},
+		// Add proper resolution for Firebase v11
+		mainFields: ["browser", "module", "main"],
 	},
 	build: {
 		outDir: "dist",
