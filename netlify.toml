@@ -13,21 +13,13 @@
       APP_DIR="apps/firegarden-cms"
       APP_NAME="firegarden-cms"
       BUILD_DIR="dist"
-    else
-      echo "Building Frontend app..."
-      APP_DIR="apps/firegarden-front"
-      APP_NAME="firegarden-front"
-      BUILD_DIR=".next"
-    fi
-    
-    # Build the selected app using package name, not directory
-    pnpm turbo build --filter=$APP_NAME
-    
-    # Prepare deployment directory
-    mkdir -p netlify-deploy
-    
-    # Check which app is being built and copy appropriate build directory
-    if [ "$SITE_APP" = "cms" ]; then
+      
+      # Build the selected app using package name, not directory
+      pnpm turbo build --filter=$APP_NAME
+      
+      # Prepare deployment directory
+      mkdir -p netlify-deploy
+      
       # For Vite app, copy from dist directory
       if [ -d "$APP_DIR/$BUILD_DIR" ]; then
         cp -R $APP_DIR/$BUILD_DIR/* netlify-deploy/
@@ -35,21 +27,36 @@
         echo "Error: Build output directory $APP_DIR/$BUILD_DIR not found"
         exit 1
       fi
+      
+      # Verify that public directory exists before copying
+      if [ -d "$APP_DIR/public" ]; then
+        cp -R $APP_DIR/public/* netlify-deploy/
+      else
+        echo "Warning: Public directory $APP_DIR/public not found"
+      fi
     else
+      echo "Building Frontend app..."
+      APP_DIR="apps/firegarden-front"
+      APP_NAME="firegarden-front"
+      BUILD_DIR=".next"
+      
+      # Build the selected app using package name, not directory
+      pnpm turbo build --filter=$APP_NAME
+      
+      # Prepare deployment directory
+      mkdir -p netlify-deploy
+      
       # For Next.js app, copy from .next directory
       if [ -d "$APP_DIR/$BUILD_DIR" ]; then
         cp -R $APP_DIR/$BUILD_DIR/* netlify-deploy/
+        
+        # Create the expected directory structure for Netlify serverless functions
+        mkdir -p netlify-deploy/apps/firegarden-front/.next
+        cp -R $APP_DIR/$BUILD_DIR/* netlify-deploy/apps/firegarden-front/.next/
       else
         echo "Error: Build output directory $APP_DIR/$BUILD_DIR not found"
         exit 1
       fi
-    fi
-    
-    # Verify that public directory exists before copying
-    if [ -d "$APP_DIR/public" ]; then
-      cp -R $APP_DIR/public/* netlify-deploy/
-    else
-      echo "Warning: Public directory $APP_DIR/public not found"
     fi
   """
   
