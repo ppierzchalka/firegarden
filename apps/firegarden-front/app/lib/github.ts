@@ -44,7 +44,7 @@ export async function getGitHubData(): Promise<GitHubData | null> {
 			lastCommitDate !== "unknown" &&
 			lastCommitObj > twoMonthsAgo
 				? formatDate(lastCommitObj)
-				: "";
+				: "More than 2 months ago";
 
 		return {
 			publicReposCount: userData.public_repos,
