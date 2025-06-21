@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@firegarden/collections-types": "workspace:*",
 		"@firegarden/ui": "workspace:*",
+		"@netlify/plugin-nextjs": "^5.11.3",
 		"firebase": "10.14.1",
 		"lucide-react": "^0.460.0",
 		"next": "15.3",

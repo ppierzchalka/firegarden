@@ -11,12 +11,8 @@
   NODE_VERSION = "18"
   NPM_FLAGS = "--version" # Prevents Netlify npm install
 
-# CMS site configuration
-[context.production.environment.cms]
-  # No specific environment variables needed
-
-# Frontend site configuration  
-[context.production.environment.front]
+# Production context environment variables
+[context.production.environment]
   NEXT_DISABLE_NETLIFY_PLATFORM = "true" # Only needed for Next.js frontend
 
 # Specific configuration for CMS site
