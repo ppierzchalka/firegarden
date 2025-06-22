@@ -1,0 +1,12 @@
+# Netlify configuration for the CMS app
+
+[build]
+  base = "/"
+  package = "apps/firegarden-cms"
+  command = "cd apps/firegarden-cms && pnpm install && pnpm turbo build --filter=firegarden-cms"
+  publish = "/apps/firegarden-cms/dist"
+  functions = "/netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--version" # Prevents Netlify npm install 
